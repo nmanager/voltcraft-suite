@@ -192,9 +192,9 @@ def build_index_html(calculators, monetization, out_dir):
     <div class="affiliate-section">
       <div class="affiliate-content">
         <h4>🛠️ Need High-Precision Components or PCB Fabrication?</h4>
-        <p>Order high quality prototype PCBs for $2 with fast global shipping, or explore verified metal film resistor kits.</p>
+        <p>Order high quality prototype PCBs for $2 with fast global shipping, SMT assembly from $8, or explore verified component kits.</p>
       </div>
-      <a href="https://jlcpcb.com/?from=voltcraft" target="_blank" rel="noopener" class="btn-affiliate">Explore Partner Deals &rarr;</a>
+      <a href="https://jlcpcb.com/?from=CDVDWKJNX" target="_blank" rel="noopener" class="btn-affiliate">Order Prototype PCBs ($2) &rarr;</a>
     </div>
   </main>
 
