@@ -1,0 +1,46 @@
+{
+  "monetization": {
+    "buy_me_a_coffee": {
+      "enabled": true,
+      "username": "indiehacker",
+      "url": "https://buymeacoffee.com/voltcraft",
+      "button_text": "☕ Buy Me a Coffee"
+    },
+    "pro_pdf_export": {
+      "enabled": true,
+      "badge": "PRO",
+      "text": "Export Engineering Calculation Report (PDF/CSV)",
+      "stripe_payment_url": "https://buy.stripe.com/test_voltcraft_pro"
+    },
+    "contextual_affiliates": [
+      {
+        "category": "resistor",
+        "title": "Precision Metal Film Resistor Kit (1% 1/4W 64 Values)",
+        "url": "https://amzn.to/3exampleResistorKit",
+        "tag": "Recommended Component",
+        "vendor": "Amazon / DigiKey"
+      },
+      {
+        "category": "battery",
+        "title": "USB-C Intelligent Li-ion 18650/21700 Battery Charger & Tester",
+        "url": "https://amzn.to/3exampleBatteryTester",
+        "tag": "Lab Gear",
+        "vendor": "Amazon / LCSC"
+      },
+      {
+        "category": "pcb",
+        "title": "JLCPCB Prototype PCBs (5 Boards for $2)",
+        "url": "https://jlcpcb.com/?from=voltcraft",
+        "tag": "PCB Fab Partner",
+        "vendor": "JLCPCB"
+      },
+      {
+        "category": "measurement",
+        "title": "Digital Multimeter True-RMS 6000 Counts Auto-Ranging",
+        "url": "https://amzn.to/3exampleMultimeter",
+        "tag": "Essential Tool",
+        "vendor": "Amazon / Mouser"
+      }
+    ]
+  }
+}

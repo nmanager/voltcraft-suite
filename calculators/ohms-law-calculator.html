@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ohm&#x27;s Law Calculator - Voltage, Current, Resistance &amp; Power | VoltCraft</title>
+  <meta name="description" content="Calculate Voltage (V), Current (I), Resistance (R), and Power (P) instantly with interactive formula visualization.">
+  <meta property="og:title" content="Ohm&#x27;s Law Calculator - Voltage, Current, Resistance &amp; Power">
+  <meta property="og:description" content="Calculate Voltage (V), Current (I), Resistance (R), and Power (P) instantly with interactive formula visualization.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://voltcraft.pages.dev/calculators/ohms-law-calculator.html">
+  <link rel="canonical" href="https://voltcraft.pages.dev/calculators/ohms-law-calculator.html">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Ohm's Law Calculator",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Calculate Voltage (V), Current (I), Resistance (R), and Power (P) instantly with interactive formula visualization."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Ohm's Law?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ohm's Law states that current through a conductor between two points is directly proportional to voltage across the points, inversely proportional to resistance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to calculate power from voltage and current?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Power in Watts equals Voltage in Volts multiplied by Current in Amperes (P = V \u00d7 I)."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <span>VoltCraft</span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀️</button>
+        <a href="https://buymeacoffee.com/voltcraft" target="_blank" rel="noopener" class="btn-coffee">☕ Buy Me a Coffee</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2.5rem;">
+    <div style="margin-bottom: 1.5rem;">
+      <a href="../index.html" style="color: var(--accent-cyan); text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to All Calculators</a>
+    </div>
+
+    <div class="badge">Basic Electrical</div>
+    <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem;">Ohm&#x27;s Law Calculator</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 800px; margin-bottom: 2rem;">Solve any two parameters of Ohm&#x27;s Law (V = I × R) and Power (P = V × I) instantly with live SVG circle visualizer.</p>
+
+    <div class="featured-calculator" style="margin-bottom: 2.5rem;">
+      <div class="calc-grid">
+        <div class="inputs-col">
+          <h3 style="font-size: 1.15rem; font-weight:700; margin-bottom: 1.25rem;">Input Parameters</h3>
+          
+              <div class="input-group">
+                <div class="input-label-row">
+                  <label for="inp_voltage">Voltage (V)</label>
+                  <span style="color: var(--accent-cyan); font-weight:700;">V</span>
+                </div>
+                <div class="input-control-row">
+                  <input type="number" id="inp_voltage" class="num-input" value="12" step="0.1" min="0.1" max="1000">
+                  <input type="range" id="slider_voltage" class="range-slider" value="12" step="0.1" min="0.1" max="1000">
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-label-row">
+                  <label for="inp_current">Current (I)</label>
+                  <span style="color: var(--accent-cyan); font-weight:700;">A</span>
+                </div>
+                <div class="input-control-row">
+                  <input type="number" id="inp_current" class="num-input" value="2" step="0.01" min="0.001" max="100">
+                  <input type="range" id="slider_current" class="range-slider" value="2" step="0.01" min="0.001" max="100">
+                </div>
+              </div>
+        </div>
+
+        <div class="results-col">
+          <h3 style="font-size: 1.15rem; font-weight:700; margin-bottom: 1.25rem;">Calculation Results</h3>
+          <div class="result-card">
+            
+              <div class="result-metric">
+                <div class="result-label">Calculated Resistance (Ω)</div>
+                <div class="result-val" id="out_resistance">—</div>
+              </div>
+              <div class="result-metric">
+                <div class="result-label">Dissipated Power (W)</div>
+                <div class="result-val" id="out_power">—</div>
+              </div>
+            <button onclick="window.triggerProExport()" style="margin-top:1rem; padding:0.6rem 1rem; background:rgba(6,182,212,0.15); border:1px solid var(--accent-cyan); color:var(--accent-cyan); border-radius:var(--radius-md); font-weight:600; cursor:pointer;">
+              📄 Export Calculation Report (Pro)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contextual Affiliate Recommendation -->
+    <div class="affiliate-section" style="margin-bottom: 2.5rem; padding: 1.5rem;">
+      <div class="affiliate-content">
+        <span class="badge" style="background: rgba(245,158,11,0.2); border-color: var(--accent-amber); color: var(--accent-amber); margin-bottom: 0.5rem;">
+          Recommended Component (Amazon / DigiKey)
+        </span>
+        <h4 style="font-size: 1.15rem; color: var(--text-main);">Precision Metal Film Resistor Kit (1% 1/4W 64 Values)</h4>
+        <p style="font-size: 0.88rem;">Tested and recommended for reliable hardware prototyping and accurate measurements.</p>
+      </div>
+      <a href="https://amzn.to/3exampleResistorKit" target="_blank" rel="noopener" class="btn-affiliate" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">View Recommended Part &rarr;</a>
+    </div>
+
+    <!-- Formula & Engineering Explanation -->
+    <section style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2.5rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Formula & Theory</h3>
+      <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); font-family: monospace; font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 1.5rem; display:inline-block;">
+        V = I \times R \quad \&amp; \quad P = V \times I
+      </div>
+
+      <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Frequently Asked Questions</h3>
+      
+          <div style="margin-bottom: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--text-main);">Q: What is Ohm&#x27;s Law?</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Ohm&#x27;s Law states that current through a conductor between two points is directly proportional to voltage across the points, inversely proportional to resistance.</p>
+          </div>
+          <div style="margin-bottom: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--text-main);">Q: How to calculate power from voltage and current?</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Power in Watts equals Voltage in Volts multiplied by Current in Amperes (P = V × I).</p>
+          </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../sitemap.xml">Sitemap</a>
+        <a href="https://buymeacoffee.com/voltcraft" target="_blank" rel="noopener">Support</a>
+      </div>
+      <p>&copy; 2026 VoltCraft. Zero-cost, high-precision engineering tools.</p>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+  <script>
+    // Custom calculation logic for this specific page
+    function solve_ohms_law_calculator() {
+            const voltage = parseFloat(document.getElementById('inp_voltage').value) || 0;
+      const current = parseFloat(document.getElementById('inp_current').value) || 0;
+      
+      // Compute specific formulas
+      if ("ohms-law-calculator" === "ohms-law-calculator") {
+        const r = voltage / (current || 1e-9);
+        const p = voltage * current;
+        document.getElementById('out_resistance').textContent = window.formatUnit(r, 'Ω');
+        document.getElementById('out_power').textContent = window.formatUnit(p, 'W');
+      } else if ("ohms-law-calculator" === "led-resistor-calculator") {
+        const vr = Math.max(0, v_supply - v_forward);
+        const i_a = i_led / 1000.0;
+        const r = vr / (i_a || 1e-9);
+        const p = vr * i_a;
+        document.getElementById('out_r_resistor').textContent = window.formatUnit(r, 'Ω');
+        document.getElementById('out_p_resistor').textContent = window.formatUnit(p, 'W');
+      } else if ("ohms-law-calculator" === "voltage-divider-calculator") {
+        const vout = vin * (r2 / (r1 + r2 || 1));
+        const ratio = r2 / (r1 + r2 || 1);
+        document.getElementById('out_vout').textContent = vout.toFixed(3) + " V";
+        document.getElementById('out_ratio').textContent = ratio.toFixed(4);
+      } else if ("ohms-law-calculator" === "battery-life-calculator") {
+        const hours = (capacity * (derate / 100.0)) / (current || 1e-9);
+        document.getElementById('out_runtime_hours').textContent = hours.toFixed(1) + " hours";
+        document.getElementById('out_runtime_days').textContent = (hours / 24.0).toFixed(2) + " days";
+      } else if ("ohms-law-calculator" === "pcb-trace-width-calculator") {
+        const area_ext = Math.pow(current / (0.048 * Math.pow(temp_rise, 0.44)), 1 / 0.725);
+        const width_ext = area_ext / (cu_thickness * 1.378);
+        document.getElementById('out_external_width').textContent = width_ext.toFixed(1) + " mils (" + (width_ext * 0.0254).toFixed(2) + " mm)";
+        const area_int = Math.pow(current / (0.024 * Math.pow(temp_rise, 0.44)), 1 / 0.725);
+        const width_int = area_int / (cu_thickness * 1.378);
+        document.getElementById('out_internal_width').textContent = width_int.toFixed(1) + " mils (" + (width_int * 0.0254).toFixed(2) + " mm)";
+      } else if ("ohms-law-calculator" === "555-timer-astable-calculator") {
+        const f = 1.44 / ((r1 + 2 * r2) * (c * 1e-6) || 1e-9);
+        const duty = ((r1 + r2) / (r1 + 2 * r2 || 1)) * 100;
+        document.getElementById('out_frequency').textContent = window.formatUnit(f, 'Hz');
+        document.getElementById('out_duty_cycle').textContent = duty.toFixed(1) + " %";
+      } else if ("ohms-law-calculator" === "rc-lowpass-filter-calculator") {
+        const fc = 1.0 / (2 * Math.PI * r * (c * 1e-9) || 1e-9);
+        const tau = r * (c * 1e-9) * 1000;
+        document.getElementById('out_fc').textContent = window.formatUnit(fc, 'Hz');
+        document.getElementById('out_tau').textContent = tau.toFixed(2) + " ms";
+      } else if ("ohms-law-calculator" === "dbm-to-watts-calculator") {
+        const mw = Math.pow(10, dbm / 10);
+        const w = Math.pow(10, (dbm - 30) / 10);
+        document.getElementById('out_watts').textContent = w >= 1 ? w.toFixed(2) + " W" : (w*1000).toFixed(2) + " mW";
+        document.getElementById('out_milliwatts').textContent = mw.toFixed(2) + " mW";
+      } else if ("ohms-law-calculator" === "wire-gauge-awg-calculator") {
+        const d_mm = 0.127 * Math.pow(92, (36 - awg) / 39);
+        const r_per_m = 0.017241 / ((Math.PI * Math.pow(d_mm / 2, 2)));
+        const vdrop = current * (r_per_m * length * 2);
+        document.getElementById('out_diameter_mm').textContent = d_mm.toFixed(3) + " mm";
+        document.getElementById('out_v_drop').textContent = vdrop.toFixed(3) + " V";
+      } else if ("ohms-law-calculator" === "smd-resistor-code-calculator") {
+        let res = "Unknown code";
+        const c_str = String(code).trim().toUpperCase();
+        if (c_str.length === 3 && !isNaN(c_str)) {
+          const base = parseInt(c_str.substring(0, 2), 10);
+          const mul = parseInt(c_str[2], 10);
+          res = window.formatUnit(base * Math.pow(10, mul), 'Ω');
+        } else if (c_str.length === 4 && !isNaN(c_str)) {
+          const base = parseInt(c_str.substring(0, 3), 10);
+          const mul = parseInt(c_str[3], 10);
+          res = window.formatUnit(base * Math.pow(10, mul), 'Ω');
+        } else if (c_str.includes('R')) {
+          res = c_str.replace('R', '.') + " Ω";
+        }
+        document.getElementById('out_resistance_str').textContent = res;
+      }
+    }
+
+    // Bind slider & input 2-way syncing
+    document.querySelectorAll('.num-input').forEach(inp => {
+      const slider = document.getElementById('slider_' + inp.id.replace('inp_', ''));
+      if (slider) {
+        inp.addEventListener('input', () => { slider.value = inp.value; solve_ohms_law_calculator(); });
+        slider.addEventListener('input', () => { inp.value = slider.value; solve_ohms_law_calculator(); });
+      } else {
+        inp.addEventListener('input', solve_ohms_law_calculator);
+      }
+    });
+
+    // Initial calculation
+    solve_ohms_law_calculator();
+  </script>
+</body>
+</html>

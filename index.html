@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoltCraft ⚡ Free Engineering & Electronics Calculator Suite</title>
+  <meta name="description" content="Free, 100% client-side engineering, PCB, and electronics calculators. Ohm's Law, LED Resistors, Voltage Dividers, 555 Timers, Battery Life & RF tools.">
+  <meta property="og:title" content="VoltCraft - Smart Electronics & Hardware Calculators">
+  <meta property="og:description" content="Instant, accurate, zero-bloat engineering calculations running 100% in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://voltcraft.pages.dev/">
+  <link rel="canonical" href="https://voltcraft.pages.dev/">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VoltCraft - Smart Engineering & Electronics Calculators",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Interactive online suite of 40+ free electronics, hardware design, and electrical engineering calculators."
+}
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <span>VoltCraft</span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀️</button>
+        <a href="https://buymeacoffee.com/voltcraft" target="_blank" rel="noopener" class="btn-coffee">☕ Buy Me a Coffee</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="badge">🚀 100% Client-Side & Free Forever</div>
+      <h1>The Zero-BS <span>Engineering & Electronics</span> Calculator Suite</h1>
+      <p>Precision tools for hardware makers, engineers, and students. Instant formulas, zero intrusive ads, zero tracking.</p>
+
+      <div class="search-box-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="calcSearch" class="search-input" placeholder="Search calculators (e.g. resistor, 555 timer, pcb trace, battery)...">
+      </div>
+
+      <div class="filter-chips">
+        <button class="chip active" data-category="all">All Tools</button><button class="chip" data-category="Basic Electrical">Basic Electrical</button><button class="chip" data-category="Digital &amp; PCB">Digital &amp; PCB</button><button class="chip" data-category="Power &amp; Battery">Power &amp; Battery</button><button class="chip" data-category="RF &amp; Audio">RF &amp; Audio</button><button class="chip" data-category="Resistors &amp; Passive">Resistors &amp; Passive</button>
+      </div>
+    </section>
+
+    <!-- Featured Live Interactive Quick Tool -->
+    <section class="featured-calculator">
+      <div class="calc-header">
+        <div>
+          <h2 style="font-size: 1.4rem; font-weight: 700;">⚡ Quick Ohm's Law & Power Solver</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Adjust sliders or numbers to see instant mathematical convergence</p>
+        </div>
+        <span class="badge" style="margin-bottom:0">Live Interactive</span>
+      </div>
+
+      <div class="calc-grid">
+        <div class="inputs-col">
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="quick_v">Voltage (V)</label>
+              <span id="lbl_v" style="color: var(--accent-cyan); font-weight:700;">Volts</span>
+            </div>
+            <div class="input-control-row">
+              <input type="number" id="quick_v" class="num-input" value="12" step="0.5" min="0.1" max="1000">
+              <input type="range" id="quick_v_slider" class="range-slider" value="12" step="0.5" min="0.1" max="100">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-label-row">
+              <label for="quick_i">Current (I)</label>
+              <span id="lbl_i" style="color: var(--accent-cyan); font-weight:700;">Amps</span>
+            </div>
+            <div class="input-control-row">
+              <input type="number" id="quick_i" class="num-input" value="2" step="0.1" min="0.01" max="100">
+              <input type="range" id="quick_i_slider" class="range-slider" value="2" step="0.1" min="0.01" max="20">
+            </div>
+          </div>
+        </div>
+
+        <div class="results-col">
+          <div class="result-card">
+            <div class="result-metric">
+              <div class="result-label">Calculated Resistance (R = V / I)</div>
+              <div class="result-val" id="quick_out_r">6.00 Ω</div>
+            </div>
+            <div class="result-metric" style="margin-bottom:0">
+              <div class="result-label">Dissipated Power (P = V × I)</div>
+              <div class="result-val" id="quick_out_p" style="color: var(--accent-amber)">24.00 W</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Directory Grid -->
+    <div class="section-title">
+      <h2>All Precision Calculators</h2>
+      <span style="font-size: 0.95rem; color: var(--text-muted); font-weight: normal;">10 verified tools</span>
+    </div>
+
+    <div class="cards-grid">
+      
+      <a href="calculators/ohms-law-calculator.html" class="calc-card" data-title="Ohm&#x27;s Law Calculator" data-category="Basic Electrical" data-desc="Solve any two parameters of Ohm&#x27;s Law (V = I × R) and Power (P = V × I) instantly with live SVG circle visualizer.">
+        <div class="calc-card-cat">Basic Electrical</div>
+        <h3>Ohm&#x27;s Law Calculator</h3>
+        <p>Solve any two parameters of Ohm&#x27;s Law (V = I × R) and Power (P = V × I) instantly with live SVG circle visualizer.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/led-resistor-calculator.html" class="calc-card" data-title="LED Series Resistor Calculator" data-category="Resistors &amp; Passive" data-desc="Prevent burning out LEDs by finding the exact resistance and recommended standard resistor wattage.">
+        <div class="calc-card-cat">Resistors &amp; Passive</div>
+        <h3>LED Series Resistor Calculator</h3>
+        <p>Prevent burning out LEDs by finding the exact resistance and recommended standard resistor wattage.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/voltage-divider-calculator.html" class="calc-card" data-title="Voltage Divider Calculator" data-category="Resistors &amp; Passive" data-desc="Quickly design potential dividers for ADC input scaling, level shifting, and reference voltages.">
+        <div class="calc-card-cat">Resistors &amp; Passive</div>
+        <h3>Voltage Divider Calculator</h3>
+        <p>Quickly design potential dividers for ADC input scaling, level shifting, and reference voltages.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/battery-life-calculator.html" class="calc-card" data-title="Battery Life &amp; Runtime Calculator" data-category="Power &amp; Battery" data-desc="Estimate real-world operating time of battery powered systems factoring in discharge derating.">
+        <div class="calc-card-cat">Power &amp; Battery</div>
+        <h3>Battery Life &amp; Runtime Calculator</h3>
+        <p>Estimate real-world operating time of battery powered systems factoring in discharge derating.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/pcb-trace-width-calculator.html" class="calc-card" data-title="PCB Trace Width Calculator (IPC-2221)" data-category="Digital &amp; PCB" data-desc="Prevent trace overheating using the industry-standard IPC-2221 formula for 1oz and 2oz copper.">
+        <div class="calc-card-cat">Digital &amp; PCB</div>
+        <h3>PCB Trace Width Calculator (IPC-2221)</h3>
+        <p>Prevent trace overheating using the industry-standard IPC-2221 formula for 1oz and 2oz copper.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/555-timer-astable-calculator.html" class="calc-card" data-title="555 Timer Astable Frequency Calculator" data-category="Digital &amp; PCB" data-desc="Design pulse generators, PWM clocks, and LED flashers instantly.">
+        <div class="calc-card-cat">Digital &amp; PCB</div>
+        <h3>555 Timer Astable Frequency Calculator</h3>
+        <p>Design pulse generators, PWM clocks, and LED flashers instantly.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/rc-lowpass-filter-calculator.html" class="calc-card" data-title="RC Low-Pass Filter Calculator" data-category="RF &amp; Audio" data-desc="Filter high-frequency noise and smooth PWM signals into analog voltages.">
+        <div class="calc-card-cat">RF &amp; Audio</div>
+        <h3>RC Low-Pass Filter Calculator</h3>
+        <p>Filter high-frequency noise and smooth PWM signals into analog voltages.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/dbm-to-watts-calculator.html" class="calc-card" data-title="dBm to Watts &amp; Volts Converter" data-category="RF &amp; Audio" data-desc="Essential RF engineering tool for Wi-Fi, LoRa, cellular, and antenna transmitter power.">
+        <div class="calc-card-cat">RF &amp; Audio</div>
+        <h3>dBm to Watts &amp; Volts Converter</h3>
+        <p>Essential RF engineering tool for Wi-Fi, LoRa, cellular, and antenna transmitter power.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/wire-gauge-awg-calculator.html" class="calc-card" data-title="AWG Wire Gauge &amp; Resistance Calculator" data-category="Basic Electrical" data-desc="Size power cables properly to avoid catastrophic voltage drop and melted wiring.">
+        <div class="calc-card-cat">Basic Electrical</div>
+        <h3>AWG Wire Gauge &amp; Resistance Calculator</h3>
+        <p>Size power cables properly to avoid catastrophic voltage drop and melted wiring.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+      <a href="calculators/smd-resistor-code-calculator.html" class="calc-card" data-title="SMD Resistor Code Calculator (3-Digit, 4-Digit, EIA-96)" data-category="Resistors &amp; Passive" data-desc="Decode tiny markings on surface mount parts instantly with visual SMD chip preview.">
+        <div class="calc-card-cat">Resistors &amp; Passive</div>
+        <h3>SMD Resistor Code Calculator (3-Digit, 4-Digit, EIA-96)</h3>
+        <p>Decode tiny markings on surface mount parts instantly with visual SMD chip preview.</p>
+        <div class="calc-card-footer">
+          <span>Open Interactive Tool</span>
+          <span>⚡ &rarr;</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Monetization / Partner Banner -->
+    <div class="affiliate-section">
+      <div class="affiliate-content">
+        <h4>🛠️ Need High-Precision Components or PCB Fabrication?</h4>
+        <p>Order high quality prototype PCBs for $2 with fast global shipping, or explore verified metal film resistor kits.</p>
+      </div>
+      <a href="https://jlcpcb.com/?from=voltcraft" target="_blank" rel="noopener" class="btn-affiliate">Explore Partner Deals &rarr;</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="sitemap.xml">Sitemap</a>
+        <a href="https://buymeacoffee.com/voltcraft" target="_blank" rel="noopener">Support</a>
+      </div>
+      <p>&copy; 2026 VoltCraft. Open-source, zero-tracking, ultra-fast engineering calculations.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

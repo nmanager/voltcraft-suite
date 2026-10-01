@@ -1,0 +1,217 @@
+[
+  {
+    "id": "ohms-law-calculator",
+    "name": "Ohm's Law Calculator",
+    "category": "Basic Electrical",
+    "affiliate_category": "resistor",
+    "meta_title": "Ohm's Law Calculator - Voltage, Current, Resistance & Power",
+    "meta_desc": "Calculate Voltage (V), Current (I), Resistance (R), and Power (P) instantly with interactive formula visualization.",
+    "summary": "Solve any two parameters of Ohm's Law (V = I × R) and Power (P = V × I) instantly with live SVG circle visualizer.",
+    "inputs": [
+      {"name": "voltage", "label": "Voltage (V)", "default": 12, "unit": "V", "min": 0.1, "max": 1000, "step": 0.1},
+      {"name": "current", "label": "Current (I)", "default": 2, "unit": "A", "min": 0.001, "max": 100, "step": 0.01}
+    ],
+    "outputs": [
+      {"name": "resistance", "label": "Calculated Resistance", "unit": "Ω", "formula": "V / I"},
+      {"name": "power", "label": "Dissipated Power", "unit": "W", "formula": "V * I"}
+    ],
+    "formula_latex": "V = I \\times R \\quad \\& \\quad P = V \\times I",
+    "faqs": [
+      {"q": "What is Ohm's Law?", "a": "Ohm's Law states that current through a conductor between two points is directly proportional to voltage across the points, inversely proportional to resistance."},
+      {"q": "How to calculate power from voltage and current?", "a": "Power in Watts equals Voltage in Volts multiplied by Current in Amperes (P = V × I)."}
+    ]
+  },
+  {
+    "id": "led-resistor-calculator",
+    "name": "LED Series Resistor Calculator",
+    "category": "Resistors & Passive",
+    "affiliate_category": "resistor",
+    "meta_title": "LED Series Resistor Calculator - Current Limiting Resistor & Power",
+    "meta_desc": "Calculate the exact current-limiting series resistor and power rating for any LED and supply voltage.",
+    "summary": "Prevent burning out LEDs by finding the exact resistance and recommended standard resistor wattage.",
+    "inputs": [
+      {"name": "v_supply", "label": "Supply Voltage (Vs)", "default": 5.0, "unit": "V", "min": 1.5, "max": 48, "step": 0.1},
+      {"name": "v_forward", "label": "LED Forward Voltage (Vf)", "default": 2.0, "unit": "V", "min": 1.2, "max": 4.5, "step": 0.1},
+      {"name": "i_led", "label": "Desired LED Current", "default": 20, "unit": "mA", "min": 1, "max": 1000, "step": 1}
+    ],
+    "outputs": [
+      {"name": "r_resistor", "label": "Required Resistance", "unit": "Ω", "formula": "(Vs - Vf) / (I / 1000)"},
+      {"name": "p_resistor", "label": "Resistor Power Dissipation", "unit": "mW", "formula": "(Vs - Vf) * (I / 1000) * 1000"}
+    ],
+    "formula_latex": "R = \\frac{V_{supply} - V_{forward}}{I_{LED}}",
+    "faqs": [
+      {"q": "Why does an LED need a series resistor?", "a": "LEDs have non-linear forward voltage characteristics. Without a current-limiting resistor, excessive current will burn out the LED."},
+      {"q": "What is standard forward voltage for blue/white LEDs?", "a": "Blue and white LEDs typically have forward voltages between 3.0V and 3.4V, while red LEDs are around 1.8V to 2.2V."}
+    ]
+  },
+  {
+    "id": "voltage-divider-calculator",
+    "name": "Voltage Divider Calculator",
+    "category": "Resistors & Passive",
+    "affiliate_category": "resistor",
+    "meta_title": "Voltage Divider Calculator - Output Voltage & Resistor Ratio",
+    "meta_desc": "Calculate output voltage (Vout) from input voltage (Vin) and resistor values (R1, R2) with transfer ratio.",
+    "summary": "Quickly design potential dividers for ADC input scaling, level shifting, and reference voltages.",
+    "inputs": [
+      {"name": "vin", "label": "Input Voltage (Vin)", "default": 5.0, "unit": "V", "min": 0.1, "max": 500, "step": 0.1},
+      {"name": "r1", "label": "Top Resistor (R1)", "default": 10000, "unit": "Ω", "min": 1, "max": 10000000, "step": 100},
+      {"name": "r2", "label": "Bottom Resistor (R2)", "default": 10000, "unit": "Ω", "min": 1, "max": 10000000, "step": 100}
+    ],
+    "outputs": [
+      {"name": "vout", "label": "Output Voltage (Vout)", "unit": "V", "formula": "Vin * (R2 / (R1 + R2))"},
+      {"name": "ratio", "label": "Divider Ratio", "unit": "Vout/Vin", "formula": "R2 / (R1 + R2)"}
+    ],
+    "formula_latex": "V_{out} = V_{in} \\times \\frac{R_2}{R_1 + R_2}",
+    "faqs": [
+      {"q": "What is the loading effect on a voltage divider?", "a": "Connecting a load resistor in parallel with R2 decreases equivalent resistance, dropping Vout. Ensure load impedance is at least 10x higher than R2."}
+    ]
+  },
+  {
+    "id": "battery-life-calculator",
+    "name": "Battery Life & Runtime Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Battery Life Calculator - Runtime in Hours & Days",
+    "meta_desc": "Calculate battery life in hours, days, and duty-cycle standby for IoT, robotics, and embedded devices.",
+    "summary": "Estimate real-world operating time of battery powered systems factoring in discharge derating.",
+    "inputs": [
+      {"name": "capacity", "label": "Battery Capacity", "default": 2500, "unit": "mAh", "min": 50, "max": 500000, "step": 50},
+      {"name": "current", "label": "Device Average Current", "default": 120, "unit": "mA", "min": 0.01, "max": 50000, "step": 1},
+      {"name": "derate", "label": "Discharge Efficiency", "default": 85, "unit": "%", "min": 50, "max": 100, "step": 1}
+    ],
+    "outputs": [
+      {"name": "runtime_hours", "label": "Runtime in Hours", "unit": "hours", "formula": "(Capacity * (Derate/100)) / Current"},
+      {"name": "runtime_days", "label": "Runtime in Days", "unit": "days", "formula": "((Capacity * (Derate/100)) / Current) / 24"}
+    ],
+    "formula_latex": "T = \\frac{\\text{Capacity} \\times \\eta}{I_{load}}",
+    "faqs": [
+      {"q": "Why apply an 85% discharge factor?", "a": "Chemical batteries suffer from self-discharge, voltage sag, and temperature variations, rarely delivering 100% rated capacity."}
+    ]
+  },
+  {
+    "id": "pcb-trace-width-calculator",
+    "name": "PCB Trace Width Calculator (IPC-2221)",
+    "category": "Digital & PCB",
+    "affiliate_category": "pcb",
+    "meta_title": "PCB Trace Width Calculator (IPC-2221) - Internal & External Current Capacity",
+    "meta_desc": "Calculate minimum PCB copper trace width for target current and allowable temperature rise.",
+    "summary": "Prevent trace overheating using the industry-standard IPC-2221 formula for 1oz and 2oz copper.",
+    "inputs": [
+      {"name": "current", "label": "Target Current", "default": 2.0, "unit": "A", "min": 0.1, "max": 30, "step": 0.1},
+      {"name": "temp_rise", "label": "Allowable Temp Rise (ΔT)", "default": 10, "unit": "°C", "min": 5, "max": 100, "step": 1},
+      {"name": "cu_thickness", "label": "Copper Weight", "default": 1.0, "unit": "oz", "min": 0.5, "max": 4, "step": 0.5}
+    ],
+    "outputs": [
+      {"name": "external_width", "label": "External Layer Width", "unit": "mils", "formula": "IPC-2221 External"},
+      {"name": "internal_width", "label": "Internal Layer Width", "unit": "mils", "formula": "IPC-2221 Internal"}
+    ],
+    "formula_latex": "I = k \\times \\Delta T^{0.44} \\times A^{0.725}",
+    "faqs": [
+      {"q": "What is 1 oz copper thickness?", "a": "1 oz copper corresponds to approximately 1.37 mils or 35 micrometers (μm) thickness on a PCB."}
+    ]
+  },
+  {
+    "id": "555-timer-astable-calculator",
+    "name": "555 Timer Astable Frequency Calculator",
+    "category": "Digital & PCB",
+    "affiliate_category": "resistor",
+    "meta_title": "555 Timer Astable Frequency & Duty Cycle Calculator",
+    "meta_desc": "Compute frequency, time high, time low, and duty cycle for NE555 timer in astable multivibrator mode.",
+    "summary": "Design pulse generators, PWM clocks, and LED flashers instantly.",
+    "inputs": [
+      {"name": "r1", "label": "Timing Resistor 1 (R1)", "default": 10000, "unit": "Ω", "min": 1000, "max": 10000000, "step": 1000},
+      {"name": "r2", "label": "Timing Resistor 2 (R2)", "default": 47000, "unit": "Ω", "min": 1000, "max": 10000000, "step": 1000},
+      {"name": "c", "label": "Timing Capacitor (C1)", "default": 10, "unit": "μF", "min": 0.001, "max": 1000, "step": 0.1}
+    ],
+    "outputs": [
+      {"name": "frequency", "label": "Oscillation Frequency", "unit": "Hz", "formula": "1.44 / ((R1 + 2*R2) * (C * 1e-6))"},
+      {"name": "duty_cycle", "label": "Duty Cycle", "unit": "%", "formula": "((R1 + R2) / (R1 + 2*R2)) * 100"}
+    ],
+    "formula_latex": "f = \\frac{1.44}{(R_1 + 2R_2) \\times C}",
+    "faqs": [
+      {"q": "Can a 555 timer generate a 50% duty cycle?", "a": "Standard astable 555 duty cycle is always > 50%. A bypass diode across R2 is required for duty cycles <= 50%."}
+    ]
+  },
+  {
+    "id": "rc-lowpass-filter-calculator",
+    "name": "RC Low-Pass Filter Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "RC Low-Pass Filter Calculator - Cutoff Frequency & Time Constant",
+    "meta_desc": "Calculate -3dB cutoff frequency (fc) and time constant (tau) for 1st order RC filters.",
+    "summary": "Filter high-frequency noise and smooth PWM signals into analog voltages.",
+    "inputs": [
+      {"name": "r", "label": "Resistance (R)", "default": 1000, "unit": "Ω", "min": 10, "max": 10000000, "step": 100},
+      {"name": "c", "label": "Capacitance (C)", "default": 100, "unit": "nF", "min": 0.001, "max": 100000, "step": 1}
+    ],
+    "outputs": [
+      {"name": "fc", "label": "Cutoff Frequency (-3dB)", "unit": "Hz", "formula": "1 / (2 * Math.PI * R * (C * 1e-9))"},
+      {"name": "tau", "label": "Time Constant (τ)", "unit": "ms", "formula": "R * (C * 1e-9) * 1000"}
+    ],
+    "formula_latex": "f_c = \\frac{1}{2 \\pi R C} \\quad \\& \\quad \\tau = R C",
+    "faqs": [
+      {"q": "What happens at the cutoff frequency?", "a": "At fc, output voltage drops by -3dB (70.7% of input) and experiences a 45° phase lag."}
+    ]
+  },
+  {
+    "id": "dbm-to-watts-calculator",
+    "name": "dBm to Watts & Volts Converter",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "dBm to Watts & Volts Converter - RF Power Conversion",
+    "meta_desc": "Convert decibel-milliwatts (dBm) to Watts, milliwatts (mW), and Peak-to-Peak Volts (Vpp @ 50Ω).",
+    "summary": "Essential RF engineering tool for Wi-Fi, LoRa, cellular, and antenna transmitter power.",
+    "inputs": [
+      {"name": "dbm", "label": "Power in dBm", "default": 20, "unit": "dBm", "min": -100, "max": 60, "step": 0.5}
+    ],
+    "outputs": [
+      {"name": "watts", "label": "Power in Watts", "unit": "W", "formula": "Math.pow(10, (dbm - 30) / 10)"},
+      {"name": "milliwatts", "label": "Power in Milliwatts", "unit": "mW", "formula": "Math.pow(10, dbm / 10)"}
+    ],
+    "formula_latex": "P_{mW} = 10^{\\frac{P_{dBm}}{10}}",
+    "faqs": [
+      {"q": "What does 0 dBm equal?", "a": "0 dBm represents exactly 1 milliwatt (1 mW) of power into a 50-ohm reference load."}
+    ]
+  },
+  {
+    "id": "wire-gauge-awg-calculator",
+    "name": "AWG Wire Gauge & Resistance Calculator",
+    "category": "Basic Electrical",
+    "affiliate_category": "measurement",
+    "meta_title": "AWG Wire Gauge & Voltage Drop Calculator - Copper Cable Ampacity",
+    "meta_desc": "Find wire diameter, cross-sectional area, resistance per meter, and voltage drop for American Wire Gauge.",
+    "summary": "Size power cables properly to avoid catastrophic voltage drop and melted wiring.",
+    "inputs": [
+      {"name": "awg", "label": "Wire Gauge (AWG)", "default": 18, "unit": "AWG", "min": 0, "max": 40, "step": 1},
+      {"name": "length", "label": "Wire Run Length", "default": 5, "unit": "meters", "min": 0.1, "max": 500, "step": 0.5},
+      {"name": "current", "label": "Load Current", "default": 3.0, "unit": "A", "min": 0.1, "max": 100, "step": 0.5}
+    ],
+    "outputs": [
+      {"name": "diameter_mm", "label": "Conductor Diameter", "unit": "mm", "formula": "0.127 * Math.pow(92, (36 - AWG) / 39)"},
+      {"name": "v_drop", "label": "Total Voltage Drop (Loop)", "unit": "V", "formula": "Current * (R_per_meter * length * 2)"}
+    ],
+    "formula_latex": "d_n = 0.127 \\times 92^{\\frac{36 - n}{39}} \\text{ mm}",
+    "faqs": [
+      {"q": "What is the recommended max voltage drop?", "a": "NEC recommends a maximum voltage drop of 3% for branch circuits to ensure device efficiency."}
+    ]
+  },
+  {
+    "id": "smd-resistor-code-calculator",
+    "name": "SMD Resistor Code Calculator (3-Digit, 4-Digit, EIA-96)",
+    "category": "Resistors & Passive",
+    "affiliate_category": "resistor",
+    "meta_title": "SMD Resistor Code Decoder & Calculator (3-Digit, 4-Digit & EIA-96)",
+    "meta_desc": "Decode SMD surface-mount resistor codes into exact Ohms, tolerance, and multiplier values.",
+    "summary": "Decode tiny markings on surface mount parts instantly with visual SMD chip preview.",
+    "inputs": [
+      {"name": "code", "label": "Marking Code (e.g. 103, 4702, 01C)", "default": "472", "type": "text"}
+    ],
+    "outputs": [
+      {"name": "resistance_str", "label": "Decoded Resistance", "unit": "Ω", "formula": "SMD Decode"}
+    ],
+    "formula_latex": "\\text{Value} = \\text{Digits} \\times 10^{\\text{Multiplier}}",
+    "faqs": [
+      {"q": "What does SMD code 472 mean?", "a": "472 represents 47 followed by 2 zeros = 4,700 Ohms (4.7 kΩ)."}
+    ]
+  }
+]
