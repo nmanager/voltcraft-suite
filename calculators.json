@@ -2460,5 +2460,176 @@
         "a": "K is the voltage ratio, calculated as 10 to the power of (dB/20), used to relate attenuation to resistance values."
       }
     ]
+  },
+  {
+    "id": "solar-iot-battery-autonomy-calculator",
+    "name": "Solar IoT Battery Autonomy Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar IoT Battery Autonomy Calculator | VoltCraft",
+    "meta_desc": "Calculate how long your IoT device will run on battery during periods of low sunlight. Essential for off-grid remote sensor and CCTV deployments.",
+    "summary": "Determines the required battery capacity to maintain system uptime for IoT devices based on average daily power consumption and expected days of autonomy.",
+    "inputs": [
+      {
+        "name": "avg_power",
+        "label": "Avg Device Power Consumption",
+        "default": 0.5,
+        "unit": "W",
+        "min": 0.01,
+        "max": 100,
+        "step": 0.01
+      },
+      {
+        "name": "system_voltage",
+        "label": "Battery System Voltage",
+        "default": 3.7,
+        "unit": "V",
+        "min": 3.3,
+        "max": 48,
+        "step": 0.1
+      },
+      {
+        "name": "autonomy_days",
+        "label": "Required Days of Autonomy",
+        "default": 5,
+        "unit": "days",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "dod",
+        "label": "Max Depth of Discharge",
+        "default": 80,
+        "unit": "%",
+        "min": 10,
+        "max": 100,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "min_capacity",
+        "label": "Minimum Battery Capacity",
+        "unit": "Ah",
+        "formula": "(avg_power * 24 * autonomy_days) / (system_voltage * (dod/100))"
+      }
+    ],
+    "formula_latex": "C_{min} = \\frac{P_{avg} \\times 24 \\times D_{auth}}{V_{sys} \\times DoD}",
+    "faqs": [
+      {
+        "q": "How many days of autonomy should I aim for?",
+        "a": "For most professional IoT deployments, 5-7 days is standard to account for extended cloudy periods."
+      },
+      {
+        "q": "Does this account for battery self-discharge?",
+        "a": "This tool calculates the load requirement; consider adding a 10-15% safety margin for self-discharge and efficiency losses."
+      }
+    ]
+  },
+  {
+    "id": "rf-quarter-wave-transformer-calculator",
+    "name": "RF Quarter-Wave Impedance Transformer Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "RF Quarter-Wave Impedance Transformer Calculator | VoltCraft",
+    "meta_desc": "Easily calculate the required characteristic impedance for a quarter-wave matching section to connect two different RF impedance loads.",
+    "summary": "Calculates the specific impedance required for a transmission line segment to match two differing impedances at a target frequency.",
+    "inputs": [
+      {
+        "name": "z1",
+        "label": "Source Impedance",
+        "default": 50,
+        "unit": "\u03a9",
+        "min": 1,
+        "max": 600,
+        "step": 1
+      },
+      {
+        "name": "z2",
+        "label": "Load Impedance",
+        "default": 75,
+        "unit": "\u03a9",
+        "min": 1,
+        "max": 600,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "z0",
+        "label": "Required Line Impedance",
+        "unit": "\u03a9",
+        "formula": "sqrt(z1 * z2)"
+      }
+    ],
+    "formula_latex": "Z_0 = \\sqrt{Z_1 \\times Z_2}",
+    "faqs": [
+      {
+        "q": "What is a quarter-wave transformer?",
+        "a": "It is a transmission line section with a length equal to one-quarter of the signal wavelength used to match two different impedances."
+      },
+      {
+        "q": "Is this frequency dependent?",
+        "a": "Yes, the physical length of the line must be exactly \u03bb/4 at your operating frequency."
+      }
+    ]
+  },
+  {
+    "id": "bldc-gate-driver-bootstrap-sizing-calculator",
+    "name": "BLDC Gate Driver Bootstrap Sizing Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "BLDC Gate Driver Bootstrap Capacitor Calculator | VoltCraft",
+    "meta_desc": "Calculate the minimum bootstrap capacitor value for high-side MOSFET gate drivers in BLDC motor controllers to prevent undervoltage lockout.",
+    "summary": "Ensures your bootstrap capacitor is sized correctly to maintain high-side MOSFET gate drive voltage during switching cycles.",
+    "inputs": [
+      {
+        "name": "qg",
+        "label": "Total Gate Charge",
+        "default": 50,
+        "unit": "nC",
+        "min": 1,
+        "max": 1000,
+        "step": 1
+      },
+      {
+        "name": "v_boot",
+        "label": "Bootstrap Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 5,
+        "max": 20,
+        "step": 0.1
+      },
+      {
+        "name": "v_uvlo",
+        "label": "UVLO Threshold",
+        "default": 2,
+        "unit": "V",
+        "min": 0.1,
+        "max": 5,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "c_boot",
+        "label": "Minimum Capacitor Size",
+        "unit": "\u00b5F",
+        "formula": "(qg * 10^-9) / (v_boot - v_uvlo) * 10 * 10^6"
+      }
+    ],
+    "formula_latex": "C_{boot} \\ge \\frac{Q_g \\times 10}{\\Delta V_{boot}}",
+    "faqs": [
+      {
+        "q": "Why is the factor 10 included?",
+        "a": "The factor of 10 is a common engineering safety margin to ensure the ripple voltage on the capacitor remains low during the switching period."
+      },
+      {
+        "q": "What happens if the capacitor is too small?",
+        "a": "The high-side driver may trigger an undervoltage lockout (UVLO), causing the MOSFET to turn off prematurely or not at all."
+      }
+    ]
   }
 ]
