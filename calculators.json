@@ -1608,5 +1608,137 @@
         "a": "Use substrates with lower loss tangents (e.g., Rogers) and ensure smooth copper foil surfaces."
       }
     ]
+  },
+  {
+    "id": "iot-solar-battery-runtime",
+    "name": "IoT Solar Battery Storage Runtime Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar Battery Runtime Calculator for IoT & CCTV Systems",
+    "meta_desc": "Estimate battery autonomy for remote IoT or CCTV setups. Calculate required storage based on daily power consumption and solar harvest patterns.",
+    "summary": "Calculates the necessary battery capacity to keep your remote solar-powered IoT device running through periods of low sunlight.",
+    "inputs": [
+      {
+        "name": "daily_wh",
+        "label": "Daily Energy Consumption",
+        "default": 5,
+        "unit": "Wh",
+        "min": 0.1,
+        "max": 100,
+        "step": 0.1
+      },
+      {
+        "name": "battery_v",
+        "label": "Battery Voltage",
+        "default": 3.7,
+        "unit": "V",
+        "min": 3.2,
+        "max": 24,
+        "step": 0.1
+      },
+      {
+        "name": "days_autonomy",
+        "label": "Required Autonomy",
+        "default": 3,
+        "unit": "Days",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "dod",
+        "label": "Max Depth of Discharge",
+        "default": 80,
+        "unit": "%",
+        "min": 10,
+        "max": 100,
+        "step": 5
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cap_ah",
+        "label": "Minimum Battery Capacity",
+        "unit": "Ah",
+        "formula": "(Daily_Wh * Days) / (Battery_V * DoD)"
+      }
+    ],
+    "formula_latex": "C_{Ah} = \\frac{E_{daily} \\cdot T_{autonomy}}{V_{batt} \\cdot DoD}",
+    "faqs": [
+      {
+        "q": "What is depth of discharge (DoD)?",
+        "a": "DoD represents the percentage of the battery capacity that is used before recharging; keeping this lower extends battery cycle life."
+      },
+      {
+        "q": "Should I include system efficiency losses?",
+        "a": "Yes, it is recommended to add a 15-20% buffer to the daily energy consumption to account for conversion losses in the buck/boost regulators."
+      }
+    ]
+  },
+  {
+    "id": "rf-differential-pair-impedance",
+    "name": "Differential Pair Impedance Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Differential Pair Impedance Calculator for High-Speed PCB",
+    "meta_desc": "Calculate the differential impedance for high-speed signals on your PCB. Essential for USB, Ethernet, and LVDS differential pair trace design.",
+    "summary": "Computes the differential impedance of coupled microstrip lines to ensure proper signal integrity and minimize reflections in high-speed circuits.",
+    "inputs": [
+      {
+        "name": "trace_w",
+        "label": "Trace Width",
+        "default": 0.2,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 2,
+        "step": 0.01
+      },
+      {
+        "name": "trace_s",
+        "label": "Trace Separation",
+        "default": 0.2,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 2,
+        "step": 0.01
+      },
+      {
+        "name": "h",
+        "label": "Height to Ground Plane",
+        "default": 0.15,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 1,
+        "step": 0.01
+      },
+      {
+        "name": "er",
+        "label": "Dielectric Constant",
+        "default": 4.4,
+        "unit": "er",
+        "min": 2,
+        "max": 10,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "z_diff",
+        "label": "Differential Impedance",
+        "unit": "Ohm",
+        "formula": "2 * Z0 * (1 - 0.48 * exp(-0.96 * S/H))"
+      }
+    ],
+    "formula_latex": "Z_{diff} \\approx 2Z_0(1 - 0.48e^{-0.96 \\frac{s}{h}})",
+    "faqs": [
+      {
+        "q": "What is the standard target for USB?",
+        "a": "USB 2.0 typically requires a differential impedance of 90 Ohms, while many high-speed Ethernet applications target 100 Ohms."
+      },
+      {
+        "q": "Does copper thickness affect impedance?",
+        "a": "Yes, thicker copper reduces impedance slightly; this calculator assumes standard 1oz copper (35um)."
+      }
+    ]
   }
 ]
