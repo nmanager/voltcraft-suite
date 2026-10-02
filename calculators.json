@@ -1497,5 +1497,116 @@
         "a": "The gap width (between the signal trace and the ground plane) is a primary variable in controlling the characteristic impedance of the transmission line."
       }
     ]
+  },
+  {
+    "id": "bl-dc-motor-back-emf-constant",
+    "name": "BLDC Motor Back-EMF & Velocity Constant Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "BLDC Motor Back-EMF & Velocity Constant Calculator | VoltCraft",
+    "meta_desc": "Calculate your BLDC motor's back-EMF constant (Ke) and velocity constant (Kv) to ensure precise motor driver synchronization and system efficiency.",
+    "summary": "This tool helps engineers determine the relationship between motor speed and generated back-EMF, essential for tuning field-oriented control (FOC) parameters.",
+    "inputs": [
+      {
+        "name": "peak_voltage",
+        "label": "Peak Voltage",
+        "default": 24,
+        "unit": "V",
+        "min": 1,
+        "max": 500,
+        "step": 0.1
+      },
+      {
+        "name": "rotational_speed",
+        "label": "Rotational Speed",
+        "default": 3000,
+        "unit": "RPM",
+        "min": 100,
+        "max": 100000,
+        "step": 10
+      }
+    ],
+    "outputs": [
+      {
+        "name": "kv_constant",
+        "label": "Velocity Constant (Kv)",
+        "unit": "RPM/V",
+        "formula": "rotational_speed / peak_voltage"
+      },
+      {
+        "name": "ke_constant",
+        "label": "Back-EMF Constant (Ke)",
+        "unit": "V/krpm",
+        "formula": "1000 / kv_constant"
+      }
+    ],
+    "formula_latex": "K_v = \\frac{\\omega}{V}, \\quad K_e = \\frac{1}{K_v}",
+    "faqs": [
+      {
+        "q": "Why is Ke important for BLDC drivers?",
+        "a": "Ke determines the voltage headroom required for the motor driver to maintain control at high speeds."
+      },
+      {
+        "q": "Does Kv change with load?",
+        "a": "Kv is a physical motor constant, but effective speed may drop under load due to internal resistance and friction."
+      }
+    ]
+  },
+  {
+    "id": "rf-coplanar-waveguide-loss-calculator",
+    "name": "Coplanar Waveguide Insertion Loss Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Coplanar Waveguide Insertion Loss Calculator | VoltCraft",
+    "meta_desc": "Calculate signal attenuation and insertion loss for coplanar waveguide PCB traces to optimize high-frequency signal integrity in your RF designs.",
+    "summary": "Quickly estimate dielectric and conductor losses in your coplanar waveguide designs to prevent signal degradation in high-speed RF circuits.",
+    "inputs": [
+      {
+        "name": "frequency",
+        "label": "Frequency",
+        "default": 2.4,
+        "unit": "GHz",
+        "min": 0.1,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "trace_length",
+        "label": "Trace Length",
+        "default": 50,
+        "unit": "mm",
+        "min": 1,
+        "max": 1000,
+        "step": 1
+      },
+      {
+        "name": "loss_tangent",
+        "label": "Substrate Loss Tangent",
+        "default": 0.002,
+        "unit": "tan\u03b4",
+        "min": 0.0001,
+        "max": 0.05,
+        "step": 0.0001
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dielectric_loss",
+        "label": "Dielectric Loss",
+        "unit": "dB",
+        "formula": "27.3 * (frequency * 1e9 / 3e8) * sqrt(dielectric_constant) * loss_tangent * (trace_length / 1000)"
+      }
+    ],
+    "formula_latex": "\\alpha_d \\approx 27.3 \\cdot \\frac{f \\cdot \\sqrt{\\epsilon_r} \\cdot \\tan\\delta}{c_0}",
+    "faqs": [
+      {
+        "q": "What is the primary cause of loss at 2.4GHz?",
+        "a": "At lower RF frequencies, dielectric loss tangent and conductor surface roughness are the dominant factors."
+      },
+      {
+        "q": "How can I reduce insertion loss?",
+        "a": "Use substrates with lower loss tangents (e.g., Rogers) and ensure smooth copper foil surfaces."
+      }
+    ]
   }
 ]
