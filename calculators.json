@@ -1383,5 +1383,119 @@
         "a": "Use batteries with lower internal resistance (higher C-rating) or add a large decoupling capacitor near the load."
       }
     ]
+  },
+  {
+    "id": "solar-panel-shading-impact-calculator",
+    "name": "Solar Panel Shading Impact Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar Panel Shading Impact Calculator | VoltCraft",
+    "meta_desc": "Calculate the power loss in your solar array due to partial shading. Optimize panel placement for maximum energy harvest in IoT and CCTV deployments.",
+    "summary": "Quantifies the reduction in power output caused by partial or intermittent shading on solar strings, helping to determine the necessity of bypass diodes or micro-inverters.",
+    "inputs": [
+      {
+        "name": "rated_power",
+        "label": "Rated Panel Power",
+        "default": 100,
+        "unit": "W",
+        "min": 5,
+        "max": 1000,
+        "step": 1
+      },
+      {
+        "name": "shaded_area",
+        "label": "Shaded Percentage",
+        "default": 20,
+        "unit": "%",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "name": "cells_in_series",
+        "label": "Cells in Series",
+        "default": 36,
+        "unit": "count",
+        "min": 1,
+        "max": 144,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "effective_power",
+        "label": "Effective Power Output",
+        "unit": "W",
+        "formula": "P_rated * (1 - (shaded_area / 100))"
+      }
+    ],
+    "formula_latex": "P_{eff} = P_{rated} \\times \\left(1 - \\frac{A_{shaded}}{100}\\right)",
+    "faqs": [
+      {
+        "q": "How does shading affect total string output?",
+        "a": "In a series connection, the most shaded cell limits the current of the entire string, often causing disproportionate power loss."
+      },
+      {
+        "q": "What is the role of bypass diodes?",
+        "a": "Bypass diodes allow current to flow around shaded cells, preventing hotspots and mitigating total power loss."
+      }
+    ]
+  },
+  {
+    "id": "rf-coplanar-waveguide-impedance-calculator",
+    "name": "Grounded Coplanar Waveguide Impedance Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Grounded Coplanar Waveguide (GCPW) Impedance Calculator",
+    "meta_desc": "Calculate the characteristic impedance of Grounded Coplanar Waveguides for high-frequency PCB designs. Essential for RF and antenna trace matching.",
+    "summary": "Determines the characteristic impedance of a GCPW trace based on trace width, gap distance, and substrate dielectric properties to ensure signal integrity.",
+    "inputs": [
+      {
+        "name": "trace_width",
+        "label": "Trace Width",
+        "default": 0.5,
+        "unit": "mm",
+        "min": 0.01,
+        "max": 10,
+        "step": 0.01
+      },
+      {
+        "name": "gap_width",
+        "label": "Gap to Ground",
+        "default": 0.2,
+        "unit": "mm",
+        "min": 0.01,
+        "max": 5,
+        "step": 0.01
+      },
+      {
+        "name": "dielectric_constant",
+        "label": "Substrate Permittivity",
+        "default": 4.4,
+        "unit": "Er",
+        "min": 1,
+        "max": 10,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "impedance",
+        "label": "Characteristic Impedance",
+        "unit": "Ohms",
+        "formula": "Approximate GCPW model calculation"
+      }
+    ],
+    "formula_latex": "Z_0 \\approx \\frac{30\\pi}{\\sqrt{\\epsilon_{eff}}} \\frac{K(k')}{K(k)}",
+    "faqs": [
+      {
+        "q": "Why use a Grounded Coplanar Waveguide?",
+        "a": "GCPW provides better isolation and lower radiation loss compared to standard microstrip lines in high-frequency applications."
+      },
+      {
+        "q": "What is the importance of the gap width?",
+        "a": "The gap width (between the signal trace and the ground plane) is a primary variable in controlling the characteristic impedance of the transmission line."
+      }
+    ]
   }
 ]
