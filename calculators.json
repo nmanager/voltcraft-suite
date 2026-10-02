@@ -2811,5 +2811,209 @@
         "a": "Yes, lead-acid and lithium batteries lose capacity in cold weather; add a 20% safety margin if deploying in extreme climates."
       }
     ]
+  },
+  {
+    "id": "mosfet-h-bridge-switching-loss-calculator",
+    "name": "MOSFET H-Bridge Switching Loss Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "MOSFET H-Bridge Switching Loss Calculator | VoltCraft",
+    "meta_desc": "Calculate power dissipation in H-Bridge motor drivers due to switching losses. Optimize thermal management for BLDC and DC motor controllers.",
+    "summary": "This calculator estimates the power loss incurred during MOSFET transitions in an H-Bridge, helping you choose the right heatsink and gate driver.",
+    "inputs": [
+      {
+        "name": "v_ds",
+        "label": "Drain-Source Voltage",
+        "default": 24,
+        "unit": "V",
+        "min": 1,
+        "max": 600,
+        "step": 1
+      },
+      {
+        "name": "i_load",
+        "label": "Load Current",
+        "default": 5,
+        "unit": "A",
+        "min": 0.1,
+        "max": 100,
+        "step": 0.1
+      },
+      {
+        "name": "f_sw",
+        "label": "Switching Frequency",
+        "default": 20000,
+        "unit": "Hz",
+        "min": 100,
+        "max": 1000000,
+        "step": 100
+      },
+      {
+        "name": "t_rise",
+        "label": "Rise Time",
+        "default": 50,
+        "unit": "ns",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      },
+      {
+        "name": "t_fall",
+        "label": "Fall Time",
+        "default": 50,
+        "unit": "ns",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "p_sw",
+        "label": "Switching Power Loss",
+        "unit": "W",
+        "formula": "0.5 * Vds * Iload * (tr + tf) * fsw"
+      }
+    ],
+    "formula_latex": "P_{sw} = \\frac{1}{2} V_{ds} I_{load} (t_{rise} + t_{fall}) f_{sw}",
+    "faqs": [
+      {
+        "q": "Why is switching loss higher at high frequencies?",
+        "a": "Because the MOSFET spends more total time in the linear region during transitions per second."
+      },
+      {
+        "q": "Does this include conduction losses?",
+        "a": "No, this tool specifically calculates switching losses; conduction loss (I^2*R_ds(on)) should be calculated separately."
+      }
+    ]
+  },
+  {
+    "id": "sallen-key-low-pass-filter-calculator",
+    "name": "Sallen-Key Low Pass Filter Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "Sallen-Key Low Pass Filter Calculator | VoltCraft",
+    "meta_desc": "Design active Sallen-Key low-pass filters. Calculate component values for specific cutoff frequencies and Q-factors for your instrumentation circuit.",
+    "summary": "Easily determine resistor and capacitor values for a 2nd-order Sallen-Key low-pass filter to achieve your desired cutoff frequency.",
+    "inputs": [
+      {
+        "name": "f_c",
+        "label": "Cutoff Frequency",
+        "default": 1000,
+        "unit": "Hz",
+        "min": 10,
+        "max": 100000,
+        "step": 10
+      },
+      {
+        "name": "q",
+        "label": "Quality Factor",
+        "default": 0.707,
+        "unit": "",
+        "min": 0.5,
+        "max": 2,
+        "step": 0.01
+      },
+      {
+        "name": "c",
+        "label": "Capacitor C1 Value",
+        "default": 10,
+        "unit": "nF",
+        "min": 0.1,
+        "max": 1000,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "r1",
+        "label": "Resistor R1",
+        "unit": "Ohms",
+        "formula": "1 / (2 * pi * fc * C * Q)"
+      },
+      {
+        "name": "r2",
+        "label": "Resistor R2",
+        "unit": "Ohms",
+        "formula": "1 / (2 * pi * fc * C * Q)"
+      }
+    ],
+    "formula_latex": "f_c = \\frac{1}{2\\pi \\sqrt{R_1 R_2 C_1 C_2}}",
+    "faqs": [
+      {
+        "q": "What is the benefit of Sallen-Key?",
+        "a": "It provides a simple, unity-gain active filter topology with good stability and low component count."
+      },
+      {
+        "q": "What Q value should I use?",
+        "a": "0.707 (Butterworth) is commonly used for a maximally flat frequency response."
+      }
+    ]
+  },
+  {
+    "id": "solar-off-grid-lithium-buffer-calculator",
+    "name": "Solar Off-Grid Lithium Buffer Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar Off-Grid Lithium Buffer Calculator | VoltCraft",
+    "meta_desc": "Calculate the required LiFePO4 battery capacity for off-grid IoT systems considering depth of discharge and daily energy consumption.",
+    "summary": "Determine the optimal battery bank size for your solar-powered IoT device, factoring in days of autonomy and maximum depth of discharge.",
+    "inputs": [
+      {
+        "name": "daily_wh",
+        "label": "Daily Energy Consumption",
+        "default": 50,
+        "unit": "Wh",
+        "min": 1,
+        "max": 5000,
+        "step": 1
+      },
+      {
+        "name": "days_auto",
+        "label": "Days of Autonomy",
+        "default": 3,
+        "unit": "days",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "dod",
+        "label": "Max Depth of Discharge",
+        "default": 80,
+        "unit": "%",
+        "min": 10,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "name": "v_nom",
+        "label": "Nominal Battery Voltage",
+        "default": 12.8,
+        "unit": "V",
+        "min": 3.2,
+        "max": 48,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "total_ah",
+        "label": "Required Capacity",
+        "unit": "Ah",
+        "formula": "(daily_wh * days_auto) / ((dod/100) * v_nom)"
+      }
+    ],
+    "formula_latex": "C_{Ah} = \\frac{E_{daily} \\times D_{auto}}{DoD \\times V_{nom}}",
+    "faqs": [
+      {
+        "q": "Why is DOD important?",
+        "a": "Limiting depth of discharge significantly extends the cycle life of LiFePO4 battery chemistries."
+      },
+      {
+        "q": "Does this include inverter efficiency?",
+        "a": "This tool assumes DC-to-DC efficiency; ensure your daily Wh consumption accounts for inverter losses if using AC."
+      }
+    ]
   }
 ]
