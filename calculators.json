@@ -666,5 +666,134 @@
         "a": "A low inductance causes higher peak currents, which can lead to inductor saturation, increased switching losses, and higher output voltage noise."
       }
     ]
+  },
+  {
+    "id": "solar-iot-autonomy-calculator",
+    "name": "Solar IoT & CCTV Autonomy Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar IoT & CCTV Autonomy Calculator - Battery & Panel Sizing",
+    "meta_desc": "Calculate the required solar panel wattage and battery capacity for your IoT or CCTV project to ensure 24/7 operation during low-sunlight conditions.",
+    "summary": "Determines the optimal battery capacity and solar array size needed to maintain continuous power for remote IoT devices based on daily energy consumption and site-specific solar insolation.",
+    "inputs": [
+      {
+        "name": "avg_power",
+        "label": "Device Average Power",
+        "default": 5,
+        "unit": "W",
+        "min": 0.1,
+        "max": 500,
+        "step": 0.1
+      },
+      {
+        "name": "autonomy_days",
+        "label": "Days of Autonomy",
+        "default": 3,
+        "unit": "days",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "peak_sun_hours",
+        "label": "Daily Peak Sun Hours",
+        "default": 4.5,
+        "unit": "h",
+        "min": 0.5,
+        "max": 10,
+        "step": 0.1
+      },
+      {
+        "name": "system_voltage",
+        "label": "System Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 3.3,
+        "max": 48,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "min_battery",
+        "label": "Minimum Battery Capacity",
+        "unit": "Ah",
+        "formula": "(avg_power * 24 * autonomy_days) / system_voltage"
+      },
+      {
+        "name": "min_panel",
+        "label": "Minimum Solar Panel Power",
+        "unit": "W",
+        "formula": "(avg_power * 24) / peak_sun_hours"
+      }
+    ],
+    "formula_latex": "C_{batt} = \\frac{P_{avg} \\times 24 \\times D_{auto}}{V_{sys}}, \\quad P_{solar} = \\frac{P_{avg} \\times 24}{H_{sun}}",
+    "faqs": [
+      {
+        "q": "How many days of autonomy should I plan for?",
+        "a": "For mission-critical CCTV, 3 to 5 days is standard to account for consecutive cloudy days."
+      },
+      {
+        "q": "Does the system voltage affect battery capacity?",
+        "a": "Yes, higher system voltages reduce the total Amp-hour requirement for the same amount of Watt-hours."
+      }
+    ]
+  },
+  {
+    "id": "h-bridge-power-dissipation-calculator",
+    "name": "H-Bridge Power Dissipation Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "H-Bridge Motor Driver Power Dissipation & Thermal Calculator",
+    "meta_desc": "Calculate power loss and thermal dissipation for MOSFET-based H-Bridge motor drivers to ensure reliable operation and prevent thermal shutdown.",
+    "summary": "Calculates power dissipation in H-Bridge motor drivers caused by conduction losses to determine if a heat sink is required for your specific motor load.",
+    "inputs": [
+      {
+        "name": "load_current",
+        "label": "Motor Load Current",
+        "default": 2,
+        "unit": "A",
+        "min": 0.1,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "rds_on",
+        "label": "MOSFET RDS(on)",
+        "default": 0.05,
+        "unit": "\u03a9",
+        "min": 0.001,
+        "max": 1,
+        "step": 0.001
+      },
+      {
+        "name": "duty_cycle",
+        "label": "PWM Duty Cycle",
+        "default": 100,
+        "unit": "%",
+        "min": 1,
+        "max": 100,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "power_loss",
+        "label": "Total Power Dissipation",
+        "unit": "W",
+        "formula": "2 * (load_current^2 * rds_on * (duty_cycle/100))"
+      }
+    ],
+    "formula_latex": "P_{loss} = 2 \\times I_{load}^2 \\times R_{DS(on)} \\times D",
+    "faqs": [
+      {
+        "q": "Why is it multiplied by 2?",
+        "a": "In a standard H-Bridge, current flows through two MOSFETs simultaneously during each phase of the switching cycle."
+      },
+      {
+        "q": "What happens if dissipation exceeds the package limit?",
+        "a": "The MOSFET junction temperature will exceed safe limits, leading to performance degradation or permanent thermal failure."
+      }
+    ]
   }
 ]
