@@ -3015,5 +3015,119 @@
         "a": "This tool assumes DC-to-DC efficiency; ensure your daily Wh consumption accounts for inverter losses if using AC."
       }
     ]
+  },
+  {
+    "id": "solar-mppt-panel-sizing-calculator",
+    "name": "Solar MPPT Panel Sizing Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar MPPT Panel Sizing Calculator | Optimize IoT Energy",
+    "meta_desc": "Calculate the ideal solar panel wattage for your MPPT charger based on battery capacity, daily consumption, and sunlight hours. Optimize your IoT power.",
+    "summary": "Determines the minimum solar panel wattage required to maintain battery state-of-charge for remote IoT devices using MPPT charging efficiency.",
+    "inputs": [
+      {
+        "name": "daily_wh",
+        "label": "Daily Energy Consumption",
+        "default": 50,
+        "unit": "Wh",
+        "min": 1,
+        "max": 5000,
+        "step": 1
+      },
+      {
+        "name": "peak_sun_hours",
+        "label": "Peak Sun Hours",
+        "default": 4.5,
+        "unit": "h",
+        "min": 0.5,
+        "max": 12,
+        "step": 0.1
+      },
+      {
+        "name": "mppt_efficiency",
+        "label": "MPPT Efficiency",
+        "default": 95,
+        "unit": "%",
+        "min": 70,
+        "max": 99,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "min_panel_wattage",
+        "label": "Minimum Panel Wattage",
+        "unit": "W",
+        "formula": "daily_wh / (peak_sun_hours * (mppt_efficiency / 100))"
+      }
+    ],
+    "formula_latex": "P_{panel} = \\frac{E_{daily}}{h_{sun} \\cdot \\eta_{mppt}}",
+    "faqs": [
+      {
+        "q": "Why include MPPT efficiency?",
+        "a": "MPPT controllers convert excess voltage into current, but they have internal losses. Accounting for this ensures your system doesn't under-charge in winter."
+      },
+      {
+        "q": "What if my location has variable sun?",
+        "a": "Always use the winter solstice peak sun hours for your location to ensure year-round operation."
+      }
+    ]
+  },
+  {
+    "id": "bldc-gate-driver-thermal-dissipation-calculator",
+    "name": "BLDC Gate Driver Thermal Dissipation Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "BLDC Gate Driver Thermal Dissipation Calculator",
+    "meta_desc": "Calculate total power dissipation in your BLDC gate driver to prevent thermal shutdown. Essential for high-frequency PWM motor control.",
+    "summary": "Calculates the power dissipation of gate drivers by accounting for gate charge, switching frequency, and driver quiescent current.",
+    "inputs": [
+      {
+        "name": "gate_charge",
+        "label": "Total Gate Charge (Qg)",
+        "default": 50,
+        "unit": "nC",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      },
+      {
+        "name": "switching_freq",
+        "label": "Switching Frequency",
+        "default": 20,
+        "unit": "kHz",
+        "min": 1,
+        "max": 200,
+        "step": 1
+      },
+      {
+        "name": "v_drive",
+        "label": "Gate Drive Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 5,
+        "max": 24,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "power_dissipated",
+        "label": "Total Power Dissipation",
+        "unit": "W",
+        "formula": "gate_charge * 1e-9 * switching_freq * 1000 * v_drive"
+      }
+    ],
+    "formula_latex": "P_{driver} = Q_g \\cdot f_{sw} \\cdot V_{drive}",
+    "faqs": [
+      {
+        "q": "Does this include conduction losses?",
+        "a": "This tool calculates the gate drive power consumption. You should add static quiescent power (Vcc * Iq) for a complete thermal budget."
+      },
+      {
+        "q": "Why is gate charge important?",
+        "a": "Higher gate charge requires more current to switch the MOSFET, leading to higher heat dissipation in the driver IC."
+      }
+    ]
   }
 ]
