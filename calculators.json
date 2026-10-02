@@ -2631,5 +2631,185 @@
         "a": "The high-side driver may trigger an undervoltage lockout (UVLO), causing the MOSFET to turn off prematurely or not at all."
       }
     ]
+  },
+  {
+    "id": "buck-converter-output-ripple-calculator",
+    "name": "Buck Converter Output Voltage Ripple Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "Buck Converter Output Ripple Calculator | VoltCraft",
+    "meta_desc": "Calculate buck converter output voltage ripple based on inductor, switching frequency, and output capacitor ESR to ensure stable power for your IoT circuit.",
+    "summary": "Quickly determine the peak-to-peak output voltage ripple of a buck regulator to ensure your sensitive IoT sensors receive clean, stable power.",
+    "inputs": [
+      {
+        "name": "frequency",
+        "label": "Switching Frequency",
+        "default": 500,
+        "unit": "kHz",
+        "min": 10,
+        "max": 5000,
+        "step": 1
+      },
+      {
+        "name": "inductor",
+        "label": "Inductance",
+        "default": 10,
+        "unit": "uH",
+        "min": 0.1,
+        "max": 1000,
+        "step": 0.1
+      },
+      {
+        "name": "capacitor_esr",
+        "label": "Capacitor ESR",
+        "default": 20,
+        "unit": "mOhm",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      },
+      {
+        "name": "input_voltage",
+        "label": "Input Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 3,
+        "max": 60,
+        "step": 0.1
+      },
+      {
+        "name": "output_voltage",
+        "label": "Output Voltage",
+        "default": 3.3,
+        "unit": "V",
+        "min": 0.8,
+        "max": 24,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ripple",
+        "label": "Output Voltage Ripple",
+        "unit": "mV",
+        "formula": "V_ripple = (V_out * (V_in - V_out) * ESR) / (L * f * V_in)"
+      }
+    ],
+    "formula_latex": "\\Delta V_{out} = \\frac{V_{out}(V_{in} - V_{out}) \\cdot ESR}{L \\cdot f_{sw} \\cdot V_{in}}",
+    "faqs": [
+      {
+        "q": "Why is ESR important for ripple?",
+        "a": "The Equivalent Series Resistance (ESR) of your output capacitor directly multiplies the inductor ripple current, often being the dominant factor in voltage ripple."
+      },
+      {
+        "q": "What is an acceptable ripple for IoT?",
+        "a": "For most 3.3V microcontrollers, a ripple under 50mV is considered safe to prevent logic errors or sensor inaccuracies."
+      }
+    ]
+  },
+  {
+    "id": "rf-microstrip-antenna-matching-calculator",
+    "name": "RF Microstrip Antenna Impedance Matching Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "RF Microstrip Antenna Matching Calculator | VoltCraft",
+    "meta_desc": "Calculate the required dimensions for a quarter-wave microstrip transformer to match your antenna impedance to your transmission line.",
+    "summary": "Match your antenna impedance to your RF source to minimize signal reflection and maximize power transfer efficiency.",
+    "inputs": [
+      {
+        "name": "z_load",
+        "label": "Antenna Impedance",
+        "default": 50,
+        "unit": "Ohm",
+        "min": 10,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "z_line",
+        "label": "Source Impedance",
+        "default": 50,
+        "unit": "Ohm",
+        "min": 10,
+        "max": 300,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "z_target",
+        "label": "Required Trace Impedance",
+        "unit": "Ohm",
+        "formula": "sqrt(z_load * z_line)"
+      }
+    ],
+    "formula_latex": "Z_{transformer} = \\sqrt{Z_{source} \\cdot Z_{load}}",
+    "faqs": [
+      {
+        "q": "When should I use a transformer?",
+        "a": "Use this when your antenna impedance differs from your 50-ohm RF feed line to eliminate VSWR losses."
+      },
+      {
+        "q": "What physical length is a quarter wave?",
+        "a": "The physical length depends on the effective dielectric constant of your PCB material at the operating frequency."
+      }
+    ]
+  },
+  {
+    "id": "solar-cctv-battery-sizing-calculator",
+    "name": "Solar CCTV Battery Autonomy Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar CCTV Battery Autonomy Calculator | VoltCraft",
+    "meta_desc": "Calculate the required battery capacity for your solar-powered CCTV system based on power draw and desired days of autonomy.",
+    "summary": "Ensure your remote security camera stays powered through cloudy days by calculating the exact battery capacity needed for your specific power profile.",
+    "inputs": [
+      {
+        "name": "power_draw",
+        "label": "Daily Power Draw",
+        "default": 24,
+        "unit": "Wh",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      },
+      {
+        "name": "autonomy",
+        "label": "Days of Autonomy",
+        "default": 3,
+        "unit": "Days",
+        "min": 1,
+        "max": 14,
+        "step": 1
+      },
+      {
+        "name": "dod",
+        "label": "Max Depth of Discharge",
+        "default": 80,
+        "unit": "%",
+        "min": 10,
+        "max": 100,
+        "step": 5
+      }
+    ],
+    "outputs": [
+      {
+        "name": "capacity",
+        "label": "Required Battery Capacity",
+        "unit": "Wh",
+        "formula": "(power_draw * autonomy) / (dod / 100)"
+      }
+    ],
+    "formula_latex": "C_{required} = \\frac{P_{daily} \\cdot T_{autonomy}}{DoD}",
+    "faqs": [
+      {
+        "q": "What is depth of discharge?",
+        "a": "DoD represents the percentage of battery capacity used. Limiting this increases the cycle life of your battery significantly."
+      },
+      {
+        "q": "Does temperature affect this?",
+        "a": "Yes, lead-acid and lithium batteries lose capacity in cold weather; add a 20% safety margin if deploying in extreme climates."
+      }
+    ]
   }
 ]
