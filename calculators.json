@@ -1854,5 +1854,203 @@
         "a": "Yes, the ratio of trace width to substrate height is the primary factor in determining characteristic impedance."
       }
     ]
+  },
+  {
+    "id": "h-bridge-mosfet-dissipation",
+    "name": "H-Bridge MOSFET Power Dissipation Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "H-Bridge MOSFET Power Dissipation Calculator | VoltCraft",
+    "meta_desc": "Calculate conduction and switching power losses for your H-bridge motor driver design to prevent thermal failure and optimize heatsink requirements.",
+    "summary": "This tool estimates total power dissipation in H-bridge MOSFETs by accounting for both conduction losses (RDS(on)) and switching losses based on your PWM frequency.",
+    "inputs": [
+      {
+        "name": "rds_on",
+        "label": "Drain-Source On-Resistance",
+        "default": 0.05,
+        "unit": "\u03a9",
+        "min": 0.001,
+        "max": 1,
+        "step": 0.001
+      },
+      {
+        "name": "i_load",
+        "label": "Load Current",
+        "default": 5,
+        "unit": "A",
+        "min": 0.1,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "f_pwm",
+        "label": "PWM Frequency",
+        "default": 20000,
+        "unit": "Hz",
+        "min": 100,
+        "max": 1000000,
+        "step": 100
+      },
+      {
+        "name": "t_rise",
+        "label": "Rise/Fall Time",
+        "default": 50,
+        "unit": "ns",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "p_cond",
+        "label": "Conduction Loss",
+        "unit": "W",
+        "formula": "I^2 * Rds(on)"
+      },
+      {
+        "name": "p_switch",
+        "label": "Switching Loss",
+        "unit": "W",
+        "formula": "0.5 * V * I * (tr + tf) * f_pwm"
+      }
+    ],
+    "formula_latex": "P_{total} = (I_{load}^2 \\cdot R_{DS(on)}) + (0.5 \\cdot V_{bus} \\cdot I_{load} \\cdot (t_{rise} + t_{fall}) \\cdot f_{pwm})",
+    "faqs": [
+      {
+        "q": "Why do switching losses increase at higher frequencies?",
+        "a": "Because MOSFETs spend more time in the linear region during transitions, where both voltage and current are high simultaneously."
+      },
+      {
+        "q": "How can I reduce conduction losses?",
+        "a": "Select a MOSFET with a lower RDS(on) value or use multiple MOSFETs in parallel."
+      }
+    ]
+  },
+  {
+    "id": "active-low-pass-filter-design",
+    "name": "Sallen-Key Low-Pass Filter Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "Sallen-Key Low-Pass Filter Calculator | VoltCraft",
+    "meta_desc": "Design precision Sallen-Key low-pass filters with ease. Calculate component values for Butterworth, Bessel, or Chebyshev filter responses.",
+    "summary": "Quickly determine the resistor and capacitor values needed to achieve a specific cutoff frequency for a 2nd-order Sallen-Key active low-pass filter.",
+    "inputs": [
+      {
+        "name": "fc",
+        "label": "Cutoff Frequency",
+        "default": 1000,
+        "unit": "Hz",
+        "min": 10,
+        "max": 100000,
+        "step": 10
+      },
+      {
+        "name": "c",
+        "label": "Capacitor C1 Value",
+        "default": 10,
+        "unit": "nF",
+        "min": 0.1,
+        "max": 1000,
+        "step": 0.1
+      },
+      {
+        "name": "q_factor",
+        "label": "Q Factor",
+        "default": 0.707,
+        "unit": "unitless",
+        "min": 0.5,
+        "max": 2,
+        "step": 0.01
+      }
+    ],
+    "outputs": [
+      {
+        "name": "r1",
+        "label": "Resistor R1",
+        "unit": "\u03a9",
+        "formula": "1 / (2 * pi * fc * C * Q)"
+      },
+      {
+        "name": "r2",
+        "label": "Resistor R2",
+        "unit": "\u03a9",
+        "formula": "1 / (2 * pi * fc * C * (1-Q))"
+      }
+    ],
+    "formula_latex": "f_c = \\frac{1}{2\\pi\\sqrt{R_1 R_2 C_1 C_2}}",
+    "faqs": [
+      {
+        "q": "What is the Q factor?",
+        "a": "The Q factor determines the filter's gain response near the cutoff frequency; 0.707 provides a maximally flat Butterworth response."
+      },
+      {
+        "q": "Can I use any op-amp?",
+        "a": "The op-amp must have a gain-bandwidth product (GBW) significantly higher than your cutoff frequency to maintain accuracy."
+      }
+    ]
+  },
+  {
+    "id": "solar-mppt-wire-sizing",
+    "name": "Solar MPPT Wire Voltage Drop Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "Solar MPPT Wire Voltage Drop Calculator | VoltCraft",
+    "meta_desc": "Ensure maximum solar efficiency by calculating wire gauge requirements for MPPT controllers to minimize voltage drop and power loss.",
+    "summary": "This calculator determines the required wire gauge (AWG) to keep voltage drop within acceptable limits for high-current solar arrays connected to MPPT chargers.",
+    "inputs": [
+      {
+        "name": "current",
+        "label": "Max Current",
+        "default": 10,
+        "unit": "A",
+        "min": 1,
+        "max": 100,
+        "step": 0.5
+      },
+      {
+        "name": "length",
+        "label": "Wire Length (One-way)",
+        "default": 5,
+        "unit": "m",
+        "min": 1,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "name": "voltage",
+        "label": "System Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 6,
+        "max": 48,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "drop",
+        "label": "Voltage Drop",
+        "unit": "V",
+        "formula": "2 * L * I * R / Area"
+      },
+      {
+        "name": "loss",
+        "label": "Power Loss",
+        "unit": "W",
+        "formula": "I^2 * R_total"
+      }
+    ],
+    "formula_latex": "V_{drop} = \\frac{2 \\cdot L \\cdot I \\cdot \\rho}{A}",
+    "faqs": [
+      {
+        "q": "What is an acceptable voltage drop?",
+        "a": "Typically, you should aim for less than 3% voltage drop for solar charging systems to maintain high efficiency."
+      },
+      {
+        "q": "How does temperature affect wire resistance?",
+        "a": "Copper resistance increases with temperature, so it is safer to oversize wires if the installation is in a hot environment."
+      }
+    ]
   }
 ]
