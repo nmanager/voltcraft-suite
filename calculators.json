@@ -2052,5 +2052,245 @@
         "a": "Copper resistance increases with temperature, so it is safer to oversize wires if the installation is in a hot environment."
       }
     ]
+  },
+  {
+    "id": "solar-pv-array-tilt-angle-optimizer",
+    "name": "Solar PV Array Tilt Angle Optimizer",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar PV Array Tilt Angle Optimizer - Maximize Energy Harvest",
+    "meta_desc": "Calculate the optimal tilt angle for your solar panels based on latitude and season to maximize energy capture for off-grid IoT and CCTV systems.",
+    "summary": "Determines the ideal mounting angle for solar panels to ensure maximum solar irradiance throughout the year or specific seasons.",
+    "inputs": [
+      {
+        "name": "latitude",
+        "label": "Site Latitude",
+        "default": 34.0,
+        "unit": "deg",
+        "min": -90,
+        "max": 90,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "optimal_tilt",
+        "label": "Optimal Tilt Angle",
+        "unit": "deg",
+        "formula": "latitude * 0.87"
+      }
+    ],
+    "formula_latex": "\\theta_{opt} \\approx \\phi \\times 0.87",
+    "faqs": [
+      {
+        "q": "Does tilt angle affect battery charging?",
+        "a": "Yes, optimal tilt increases daily average current, reducing the risk of battery depletion during low-sunlight months."
+      },
+      {
+        "q": "Should I adjust tilt seasonally?",
+        "a": "For maximum yield, adjusting tilt twice a year (summer/winter) is recommended, though fixed tilt is common for IoT nodes."
+      }
+    ]
+  },
+  {
+    "id": "rf-coaxial-cable-attenuation-calculator",
+    "name": "RF Coaxial Cable Attenuation Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "RF Coaxial Cable Attenuation Calculator - Signal Loss Estimator",
+    "meta_desc": "Calculate signal loss (dB) in coaxial cables based on frequency, cable length, and attenuation constant to ensure reliable RF communication.",
+    "summary": "Computes the total signal attenuation in coaxial lines, critical for maintaining link budget in high-frequency wireless systems.",
+    "inputs": [
+      {
+        "name": "freq",
+        "label": "Frequency",
+        "default": 2.4,
+        "unit": "GHz",
+        "min": 0.1,
+        "max": 10,
+        "step": 0.1
+      },
+      {
+        "name": "length",
+        "label": "Cable Length",
+        "default": 5,
+        "unit": "m",
+        "min": 0.1,
+        "max": 100,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "loss",
+        "label": "Total Loss",
+        "unit": "dB",
+        "formula": "length * attenuation_per_meter"
+      }
+    ],
+    "formula_latex": "A_{total} = L \\times A_{100m} / 100",
+    "faqs": [
+      {
+        "q": "Why is attenuation important?",
+        "a": "Excessive attenuation reduces the effective range of antennas and can cause signal-to-noise ratio issues."
+      },
+      {
+        "q": "Does cable quality matter?",
+        "a": "Yes, dielectric material and shielding density significantly impact the attenuation constant provided by manufacturers."
+      }
+    ]
+  },
+  {
+    "id": "bldc-motor-driver-thermal-dissipation",
+    "name": "BLDC Motor Driver Thermal Dissipation Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "BLDC Motor Driver Thermal Dissipation Calculator",
+    "meta_desc": "Estimate thermal dissipation in BLDC motor driver MOSFETs to prevent overheating and ensure efficient power management in motor control designs.",
+    "summary": "Calculates power loss in motor driver stages based on RDS(on) and RMS current to determine thermal management requirements.",
+    "inputs": [
+      {
+        "name": "rds",
+        "label": "RDS(on)",
+        "default": 0.05,
+        "unit": "Ohm",
+        "min": 0.001,
+        "max": 1,
+        "step": 0.001
+      },
+      {
+        "name": "current",
+        "label": "RMS Current",
+        "default": 2,
+        "unit": "A",
+        "min": 0.1,
+        "max": 50,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "pd",
+        "label": "Power Dissipation",
+        "unit": "W",
+        "formula": "current^2 * rds"
+      }
+    ],
+    "formula_latex": "P_d = I_{rms}^2 \\times R_{DS(on)}",
+    "faqs": [
+      {
+        "q": "How do I reduce heat in drivers?",
+        "a": "Select MOSFETs with lower RDS(on) or increase PCB copper area for better thermal conductivity."
+      },
+      {
+        "q": "Is switching loss included?",
+        "a": "This tool focuses on conduction loss; switching losses should be calculated separately for high-frequency PWM."
+      }
+    ]
+  },
+  {
+    "id": "active-bandpass-filter-center-freq",
+    "name": "Active Bandpass Filter Center Frequency Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "resistor",
+    "meta_title": "Active Bandpass Filter Center Frequency Calculator",
+    "meta_desc": "Design precise active bandpass filters by calculating center frequency and component values for Op-Amp based signal processing circuits.",
+    "summary": "Quickly determine the center frequency and bandwidth for operational amplifier-based multiple feedback bandpass filters.",
+    "inputs": [
+      {
+        "name": "r",
+        "label": "Resistance",
+        "default": 10000,
+        "unit": "Ohm",
+        "min": 100,
+        "max": 1000000,
+        "step": 100
+      },
+      {
+        "name": "c",
+        "label": "Capacitance",
+        "default": 1e-07,
+        "unit": "F",
+        "min": 1e-09,
+        "max": 0.001,
+        "step": 1e-09
+      }
+    ],
+    "outputs": [
+      {
+        "name": "freq",
+        "label": "Center Frequency",
+        "unit": "Hz",
+        "formula": "1 / (2 * 3.14159 * r * c)"
+      }
+    ],
+    "formula_latex": "f_c = \\frac{1}{2\\pi RC}",
+    "faqs": [
+      {
+        "q": "What is the Q factor?",
+        "a": "The Q factor determines the selectivity of the filter; higher Q means a narrower passband."
+      },
+      {
+        "q": "Can I use any Op-Amp?",
+        "a": "Ensure the Op-Amp has sufficient Gain-Bandwidth Product (GBW) for your target frequency."
+      }
+    ]
+  },
+  {
+    "id": "boost-converter-inductor-selection",
+    "name": "Boost Converter Inductor Selection Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "Boost Converter Inductor Selection Calculator - Optimize Sizing",
+    "meta_desc": "Calculate the required inductance for boost converters to maintain stable output voltage and manage ripple current effectively.",
+    "summary": "Calculates the minimum inductance required to keep a boost converter operating in continuous conduction mode (CCM) based on ripple requirements.",
+    "inputs": [
+      {
+        "name": "vin",
+        "label": "Input Voltage",
+        "default": 5,
+        "unit": "V",
+        "min": 1,
+        "max": 48,
+        "step": 0.1
+      },
+      {
+        "name": "vout",
+        "label": "Output Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 5,
+        "max": 100,
+        "step": 0.1
+      },
+      {
+        "name": "freq",
+        "label": "Switching Freq",
+        "default": 500000,
+        "unit": "Hz",
+        "min": 10000,
+        "max": 2000000,
+        "step": 1000
+      }
+    ],
+    "outputs": [
+      {
+        "name": "l_min",
+        "label": "Minimum Inductance",
+        "unit": "uH",
+        "formula": "(vin * (vout - vin)) / (freq * ripple_current * vout)"
+      }
+    ],
+    "formula_latex": "L_{min} = \\frac{V_{in} \\times (V_{out} - V_{in})}{\\Delta I_L \\times f_{sw} \\times V_{out}}",
+    "faqs": [
+      {
+        "q": "What happens if I use too little inductance?",
+        "a": "The converter may enter Discontinuous Conduction Mode (DCM), causing higher peak currents and potential instability."
+      },
+      {
+        "q": "How does frequency affect inductor size?",
+        "a": "Higher switching frequencies allow for smaller physical inductors, reducing PCB footprint."
+      }
+    ]
   }
 ]
