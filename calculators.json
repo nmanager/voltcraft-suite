@@ -1740,5 +1740,119 @@
         "a": "Yes, thicker copper reduces impedance slightly; this calculator assumes standard 1oz copper (35um)."
       }
     ]
+  },
+  {
+    "id": "buck-inductor-ripple-current-calculator",
+    "name": "Buck Converter Inductor Ripple Current Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "Buck Converter Inductor Ripple & Sizing Calculator | VoltCraft",
+    "meta_desc": "Optimize your buck converter design by calculating the ideal inductor value and ripple current to minimize output voltage noise.",
+    "summary": "Determines the necessary inductance to keep current ripple within a target percentage of the output current for efficient power conversion.",
+    "inputs": [
+      {
+        "name": "vin",
+        "label": "Input Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 3,
+        "max": 60,
+        "step": 0.1
+      },
+      {
+        "name": "vout",
+        "label": "Output Voltage",
+        "default": 5,
+        "unit": "V",
+        "min": 0.8,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "freq",
+        "label": "Switching Frequency",
+        "default": 500000,
+        "unit": "Hz",
+        "min": 10000,
+        "max": 5000000,
+        "step": 1000
+      }
+    ],
+    "outputs": [
+      {
+        "name": "l_min",
+        "label": "Minimum Inductance",
+        "unit": "\u00b5H",
+        "formula": "(Vin - Vout) * Vout / (f * Iripple * Vin)"
+      }
+    ],
+    "formula_latex": "L = \\frac{V_{out} \\cdot (V_{in} - V_{out})}{\\Delta I_L \\cdot f_{sw} \\cdot V_{in}}",
+    "faqs": [
+      {
+        "q": "What is the target ripple current?",
+        "a": "Typically, the inductor ripple current is chosen to be 20-40% of the maximum output current."
+      },
+      {
+        "q": "How does frequency affect inductance?",
+        "a": "Higher switching frequencies allow for smaller physical inductor values, reducing PCB footprint."
+      }
+    ]
+  },
+  {
+    "id": "microstrip-taper-impedance-calculator",
+    "name": "Microstrip Impedance Taper Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Microstrip Impedance Taper Design Calculator | VoltCraft",
+    "meta_desc": "Calculate dimensions for RF microstrip impedance transitions to minimize signal reflection and insertion loss in high-frequency circuits.",
+    "summary": "Calculates the physical geometry required to transition between two different microstrip widths while maintaining constant characteristic impedance.",
+    "inputs": [
+      {
+        "name": "z0",
+        "label": "Target Impedance",
+        "default": 50,
+        "unit": "\u03a9",
+        "min": 25,
+        "max": 150,
+        "step": 1
+      },
+      {
+        "name": "er",
+        "label": "Dielectric Constant",
+        "default": 4.4,
+        "unit": "\u03b5r",
+        "min": 1,
+        "max": 15,
+        "step": 0.1
+      },
+      {
+        "name": "h",
+        "label": "Substrate Height",
+        "default": 1.6,
+        "unit": "mm",
+        "min": 0.1,
+        "max": 5,
+        "step": 0.05
+      }
+    ],
+    "outputs": [
+      {
+        "name": "width",
+        "label": "Required Trace Width",
+        "unit": "mm",
+        "formula": "W = f(Z0, Er, H)"
+      }
+    ],
+    "formula_latex": "Z_0 = \\frac{87}{\\sqrt{\\epsilon_r + 1.41}} \\ln \\left( \\frac{5.98h}{0.8w + t} \\right)",
+    "faqs": [
+      {
+        "q": "What is the importance of a taper?",
+        "a": "Tapers prevent abrupt impedance discontinuities which cause signal reflections in high-frequency RF paths."
+      },
+      {
+        "q": "Does substrate thickness matter?",
+        "a": "Yes, the ratio of trace width to substrate height is the primary factor in determining characteristic impedance."
+      }
+    ]
   }
 ]
