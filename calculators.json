@@ -600,5 +600,71 @@
       }
     ],
     "social_promo": "Stop guessing your thermal overhead! Use our new Heat Sink Thermal Resistance Calculator to ensure your power electronics stay cool and reliable. #Electronics #ThermalManagement #Engineering #VoltCraft"
+  },
+  {
+    "id": "buck-converter-inductor-sizing",
+    "name": "Buck Converter Inductor Sizing Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "Buck Converter Inductor Calculator | VoltCraft",
+    "meta_desc": "Calculate the optimal inductor value for your DC-DC buck converter to ensure stable ripple current and efficient power conversion for your IoT projects.",
+    "summary": "Determines the minimum inductance required for a buck converter based on input/output voltage, switching frequency, and target inductor ripple current.",
+    "inputs": [
+      {
+        "name": "vin",
+        "label": "Input Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 1,
+        "max": 100,
+        "step": 0.1
+      },
+      {
+        "name": "vout",
+        "label": "Output Voltage",
+        "default": 5,
+        "unit": "V",
+        "min": 0.8,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "fsw",
+        "label": "Switching Frequency",
+        "default": 500,
+        "unit": "kHz",
+        "min": 10,
+        "max": 5000,
+        "step": 1
+      },
+      {
+        "name": "ripple",
+        "label": "Target Ripple Current",
+        "default": 0.3,
+        "unit": "A",
+        "min": 0.01,
+        "max": 10,
+        "step": 0.01
+      }
+    ],
+    "outputs": [
+      {
+        "name": "inductance",
+        "label": "Minimum Inductance",
+        "unit": "\u00b5H",
+        "formula": "(Vout * (Vin - Vout)) / (Vin * fsw * ripple)"
+      }
+    ],
+    "formula_latex": "L_{min} = \\frac{V_{out} \\cdot (V_{in} - V_{out})}{V_{in} \\cdot f_{sw} \\cdot \\Delta I_L}",
+    "faqs": [
+      {
+        "q": "Why is inductor ripple current important?",
+        "a": "Keeping ripple current between 20% and 40% of the maximum output current balances efficiency, physical component size, and output voltage ripple."
+      },
+      {
+        "q": "What happens if the inductor value is too low?",
+        "a": "A low inductance causes higher peak currents, which can lead to inductor saturation, increased switching losses, and higher output voltage noise."
+      }
+    ]
   }
 ]
