@@ -1257,5 +1257,131 @@
         "a": "Yes, if the ambient temperature is high, the allowable temperature rise for the trace decreases, requiring a wider trace."
       }
     ]
+  },
+  {
+    "id": "rf-patch-antenna-dimension",
+    "name": "Microstrip Patch Antenna Dimension Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "Microstrip Patch Antenna Calculator | RF Design Tools - VoltCraft",
+    "meta_desc": "Calculate the width and length of a rectangular microstrip patch antenna for a target resonant frequency, substrate dielectric constant, and thickness.",
+    "summary": "Quickly determine the physical dimensions of a rectangular microstrip patch antenna to ensure resonance at your target RF frequency.",
+    "inputs": [
+      {
+        "name": "frequency",
+        "label": "Resonant Frequency",
+        "default": 2.4,
+        "unit": "GHz",
+        "min": 0.1,
+        "max": 30,
+        "step": 0.01
+      },
+      {
+        "name": "er",
+        "label": "Substrate Dielectric Constant (Er)",
+        "default": 4.4,
+        "unit": "unitless",
+        "min": 1,
+        "max": 12,
+        "step": 0.1
+      },
+      {
+        "name": "h",
+        "label": "Substrate Thickness",
+        "default": 1.6,
+        "unit": "mm",
+        "min": 0.1,
+        "max": 10,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "width",
+        "label": "Patch Width",
+        "unit": "mm",
+        "formula": "W = (c / (2 * f)) * sqrt(2 / (er + 1))"
+      },
+      {
+        "name": "length",
+        "label": "Patch Length",
+        "unit": "mm",
+        "formula": "L = (c / (2 * f * sqrt(ereff))) - (2 * deltaL)"
+      }
+    ],
+    "formula_latex": "W = \\frac{c}{2f_r}\\sqrt{\\frac{2}{\\epsilon_r + 1}}",
+    "faqs": [
+      {
+        "q": "What is the primary limitation of a patch antenna?",
+        "a": "Patch antennas typically have a narrow bandwidth and lower gain compared to larger antenna structures."
+      },
+      {
+        "q": "Does substrate thickness affect resonance?",
+        "a": "Yes, increasing substrate thickness increases the fringing fields, which effectively increases the electrical length of the patch."
+      }
+    ]
+  },
+  {
+    "id": "battery-voltage-sag-estimator",
+    "name": "Battery Voltage Sag & Internal Resistance Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Battery Voltage Sag & Internal Resistance Calculator - VoltCraft",
+    "meta_desc": "Estimate voltage drop under load based on battery internal resistance and discharge current to ensure stable power for your IoT devices.",
+    "summary": "Predict how much your battery voltage will sag under heavy current loads to prevent unexpected system resets in battery-powered IoT applications.",
+    "inputs": [
+      {
+        "name": "v_nominal",
+        "label": "Nominal Voltage",
+        "default": 3.7,
+        "unit": "V",
+        "min": 1,
+        "max": 48,
+        "step": 0.1
+      },
+      {
+        "name": "r_internal",
+        "label": "Internal Resistance",
+        "default": 50,
+        "unit": "m\u03a9",
+        "min": 1,
+        "max": 1000,
+        "step": 1
+      },
+      {
+        "name": "i_load",
+        "label": "Load Current",
+        "default": 1.5,
+        "unit": "A",
+        "min": 0.01,
+        "max": 50,
+        "step": 0.01
+      }
+    ],
+    "outputs": [
+      {
+        "name": "v_sag",
+        "label": "Voltage Sag",
+        "unit": "V",
+        "formula": "V_sag = I_load * R_internal"
+      },
+      {
+        "name": "v_under_load",
+        "label": "Voltage Under Load",
+        "unit": "V",
+        "formula": "V_load = V_nominal - V_sag"
+      }
+    ],
+    "formula_latex": "V_{sag} = I_{load} \\times R_{internal}",
+    "faqs": [
+      {
+        "q": "Why does voltage sag occur?",
+        "a": "Voltage sag is caused by the internal resistance of the battery cell; as current flows, Ohm's law creates a voltage drop across that internal resistance."
+      },
+      {
+        "q": "How can I reduce voltage sag?",
+        "a": "Use batteries with lower internal resistance (higher C-rating) or add a large decoupling capacitor near the load."
+      }
+    ]
   }
 ]
