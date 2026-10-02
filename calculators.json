@@ -927,5 +927,110 @@
         "a": "Exceeding the maximum input voltage typically results in immediate failure or permanent damage to the charge controller's input stage."
       }
     ]
+  },
+  {
+    "id": "sallen-key-active-filter",
+    "name": "Sallen-Key Active Filter Cutoff Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "Sallen-Key Active Filter Calculator | Low-Pass & High-Pass Design",
+    "meta_desc": "Easily calculate component values for Sallen-Key low-pass and high-pass active filters. Perfect for precision audio and signal conditioning designs.",
+    "summary": "Simplifies the design of second-order Sallen-Key active filters by calculating required resistor and capacitor values for a target cutoff frequency and gain.",
+    "inputs": [
+      {
+        "name": "cutoff_freq",
+        "label": "Cutoff Frequency",
+        "default": 1000,
+        "unit": "Hz",
+        "min": 1,
+        "max": 1000000,
+        "step": 1
+      },
+      {
+        "name": "resistor_r",
+        "label": "Resistor R",
+        "default": 10000,
+        "unit": "\u03a9",
+        "min": 100,
+        "max": 1000000,
+        "step": 100
+      }
+    ],
+    "outputs": [
+      {
+        "name": "capacitor_c",
+        "label": "Capacitor C",
+        "unit": "F",
+        "formula": "1 / (2 * \u03c0 * f * R)"
+      }
+    ],
+    "formula_latex": "f_c = \\frac{1}{2\\pi RC}",
+    "faqs": [
+      {
+        "q": "What is the advantage of a Sallen-Key filter?",
+        "a": "It provides a second-order response using only one op-amp and is easier to tune than multiple-feedback topologies."
+      },
+      {
+        "q": "How do I choose the resistor values?",
+        "a": "Typically, you select standard capacitor values first, then calculate the necessary resistor values to reach your target frequency."
+      }
+    ]
+  },
+  {
+    "id": "buck-converter-output-ripple",
+    "name": "Buck Converter Output Voltage Ripple Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Buck Converter Ripple Calculator | Output Voltage Ripple Analysis",
+    "meta_desc": "Calculate output voltage ripple for synchronous and non-synchronous buck converters based on output capacitance and ESR values.",
+    "summary": "Determines the peak-to-peak output voltage ripple of a buck regulator to ensure clean power delivery for sensitive sensitive IoT sensors and microcontrollers.",
+    "inputs": [
+      {
+        "name": "switching_freq",
+        "label": "Switching Frequency",
+        "default": 500000,
+        "unit": "Hz",
+        "min": 10000,
+        "max": 5000000,
+        "step": 1000
+      },
+      {
+        "name": "output_capacitance",
+        "label": "Output Capacitance",
+        "default": 22,
+        "unit": "\u00b5F",
+        "min": 0.1,
+        "max": 1000,
+        "step": 0.1
+      },
+      {
+        "name": "inductor_ripple_current",
+        "label": "Inductor Ripple Current",
+        "default": 0.5,
+        "unit": "A",
+        "min": 0.01,
+        "max": 10,
+        "step": 0.01
+      }
+    ],
+    "outputs": [
+      {
+        "name": "voltage_ripple",
+        "label": "Output Voltage Ripple",
+        "unit": "V",
+        "formula": "\u0394I / (8 * f * C)"
+      }
+    ],
+    "formula_latex": "\\Delta V_{out} = \\frac{\\Delta I_L}{8f_{sw}C_{out}}",
+    "faqs": [
+      {
+        "q": "Why is output ripple important?",
+        "a": "High voltage ripple can cause instability in precision ADCs and introduce noise into sensitive wireless communication modules."
+      },
+      {
+        "q": "Does ESR affect this calculation?",
+        "a": "Yes, actual ripple is the sum of capacitive ripple and ESR-induced ripple (\u0394I * ESR). This calculator focuses on the capacitive component."
+      }
+    ]
   }
 ]
