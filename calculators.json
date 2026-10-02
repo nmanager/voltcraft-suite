@@ -795,5 +795,137 @@
         "a": "The MOSFET junction temperature will exceed safe limits, leading to performance degradation or permanent thermal failure."
       }
     ]
+  },
+  {
+    "id": "microstrip-impedance-calculator",
+    "name": "Microstrip Transmission Line Impedance Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Microstrip Impedance Calculator | PCB Trace Design Tool",
+    "meta_desc": "Calculate the characteristic impedance of a microstrip transmission line based on PCB trace width, substrate height, and dielectric constant (Er).",
+    "summary": "Quickly determine the characteristic impedance of PCB traces for high-speed signal integrity and RF matching.",
+    "inputs": [
+      {
+        "name": "trace_width",
+        "label": "Trace Width (w)",
+        "default": 0.5,
+        "unit": "mm",
+        "min": 0.01,
+        "max": 10,
+        "step": 0.01
+      },
+      {
+        "name": "dielectric_height",
+        "label": "Substrate Height (h)",
+        "default": 1.6,
+        "unit": "mm",
+        "min": 0.1,
+        "max": 5,
+        "step": 0.01
+      },
+      {
+        "name": "dielectric_constant",
+        "label": "Dielectric Constant (Er)",
+        "default": 4.4,
+        "unit": "",
+        "min": 1,
+        "max": 10,
+        "step": 0.1
+      },
+      {
+        "name": "copper_thickness",
+        "label": "Copper Thickness (t)",
+        "default": 0.035,
+        "unit": "mm",
+        "min": 0.01,
+        "max": 0.2,
+        "step": 0.005
+      }
+    ],
+    "outputs": [
+      {
+        "name": "impedance",
+        "label": "Characteristic Impedance",
+        "unit": "\u03a9",
+        "formula": "87 / sqrt(Er + 1.41) * ln(5.98 * h / (0.8 * w + t))"
+      }
+    ],
+    "formula_latex": "Z_0 = \\frac{87}{\\sqrt{\\epsilon_r + 1.41}} \\ln\\left(\\frac{5.98h}{0.8w + t}\\right)",
+    "faqs": [
+      {
+        "q": "Why is trace impedance important?",
+        "a": "Maintaining consistent impedance prevents signal reflections, which can cause data errors and signal degradation in high-frequency circuits."
+      },
+      {
+        "q": "Does copper thickness affect impedance?",
+        "a": "Yes, increasing copper thickness slightly lowers the characteristic impedance because it increases the effective width of the trace."
+      }
+    ]
+  },
+  {
+    "id": "solar-mppt-sizing-calculator",
+    "name": "Solar MPPT Panel Array Sizing Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar MPPT Array Sizing Calculator | Voltage & Power Config",
+    "meta_desc": "Calculate the optimal solar panel configuration for your MPPT charge controller based on open-circuit voltage (Voc) and temperature coefficients.",
+    "summary": "Ensure your solar panel array voltage stays within the safe operating range of your MPPT charge controller while accounting for cold weather voltage spikes.",
+    "inputs": [
+      {
+        "name": "mppt_max_voltage",
+        "label": "MPPT Max Input Voltage",
+        "default": 100,
+        "unit": "V",
+        "min": 12,
+        "max": 600,
+        "step": 1
+      },
+      {
+        "name": "panel_voc",
+        "label": "Panel Open Circuit Voltage (Voc)",
+        "default": 37.5,
+        "unit": "V",
+        "min": 5,
+        "max": 100,
+        "step": 0.1
+      },
+      {
+        "name": "temp_coeff",
+        "label": "Voltage Temp Coeff",
+        "default": -0.3,
+        "unit": "%/\u00b0C",
+        "min": -0.5,
+        "max": 0,
+        "step": 0.01
+      },
+      {
+        "name": "min_temp",
+        "label": "Lowest Expected Temp",
+        "default": -10,
+        "unit": "\u00b0C",
+        "min": -40,
+        "max": 20,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "max_series",
+        "label": "Max Panels in Series",
+        "unit": "panels",
+        "formula": "floor(MPPT_Max / (Voc * (1 + (min_temp - 25) * (temp_coeff / 100))))"
+      }
+    ],
+    "formula_latex": "V_{max} = V_{oc} \\times [1 + (T_{min} - 25) \\times \\frac{\\alpha}{100}]",
+    "faqs": [
+      {
+        "q": "Why include temperature in the calculation?",
+        "a": "Solar panels produce higher voltage in colder temperatures. If you ignore this, you risk exceeding the MPPT input voltage and damaging the controller."
+      },
+      {
+        "q": "What happens if I exceed the MPPT voltage?",
+        "a": "Exceeding the maximum input voltage typically results in immediate failure or permanent damage to the charge controller's input stage."
+      }
+    ]
   }
 ]
