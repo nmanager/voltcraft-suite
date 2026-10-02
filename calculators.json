@@ -1161,5 +1161,101 @@
         "a": "A higher dielectric constant lowers the characteristic impedance for a given set of conductor dimensions."
       }
     ]
+  },
+  {
+    "id": "li-ion-battery-cycle-life-estimator",
+    "name": "Li-ion Battery Cycle Life & Capacity Degradation Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Li-ion Battery Cycle Life & Capacity Degradation Calculator",
+    "meta_desc": "Estimate Li-ion battery cycle life based on depth of discharge (DoD) and discharge rates to optimize your IoT power system longevity.",
+    "summary": "Predicts the usable cycle life and capacity fade of Lithium-ion cells based on operating conditions to prevent premature power system failure.",
+    "inputs": [
+      {
+        "name": "dod",
+        "label": "Depth of Discharge",
+        "default": 80,
+        "unit": "%",
+        "min": 5,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "name": "c_rate",
+        "label": "Discharge C-Rate",
+        "default": 0.5,
+        "unit": "C",
+        "min": 0.1,
+        "max": 5,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "cycles",
+        "label": "Estimated Cycles",
+        "unit": "cycles",
+        "formula": "1000 * (1 - (dod/100)) / c_rate"
+      }
+    ],
+    "formula_latex": "N_{cycles} \\approx \\frac{1000 \\times (1 - DoD)}{C_{rate}}",
+    "faqs": [
+      {
+        "q": "How does DoD affect cycle life?",
+        "a": "Higher Depth of Discharge accelerates chemical degradation inside the cell, significantly reducing the total number of charge cycles."
+      },
+      {
+        "q": "Why include C-rate in the calculation?",
+        "a": "Higher discharge currents generate more internal heat, which increases electrolyte decomposition and reduces battery lifespan."
+      }
+    ]
+  },
+  {
+    "id": "pcb-trace-current-capacity-calculator",
+    "name": "PCB Trace Current Capacity Calculator",
+    "category": "Digital & PCB",
+    "affiliate_category": "pcb",
+    "meta_title": "PCB Trace Current Capacity Calculator (IPC-2221 Standard)",
+    "meta_desc": "Calculate the maximum current your PCB traces can handle before overheating based on width, thickness, and temperature rise.",
+    "summary": "Determines the necessary PCB trace width for a given current load to prevent track melting and meet IPC-2221 safety standards.",
+    "inputs": [
+      {
+        "name": "current",
+        "label": "Max Current",
+        "default": 1.0,
+        "unit": "A",
+        "min": 0.01,
+        "max": 50,
+        "step": 0.01
+      },
+      {
+        "name": "thickness",
+        "label": "Copper Thickness",
+        "default": 35,
+        "unit": "um",
+        "min": 17,
+        "max": 105,
+        "step": 17
+      }
+    ],
+    "outputs": [
+      {
+        "name": "width",
+        "label": "Required Trace Width",
+        "unit": "mm",
+        "formula": "((current / (k * temp_rise^b))^(1/c)) / thickness"
+      }
+    ],
+    "formula_latex": "I = k \\times \\Delta T^{0.44} \\times A^{0.725}",
+    "faqs": [
+      {
+        "q": "What is the IPC-2221 standard?",
+        "a": "It is the industry standard for PCB design that provides empirical formulas for current-carrying capacity based on temperature rise."
+      },
+      {
+        "q": "Does ambient temperature matter?",
+        "a": "Yes, if the ambient temperature is high, the allowable temperature rise for the trace decreases, requiring a wider trace."
+      }
+    ]
   }
 ]
