@@ -3291,5 +3291,206 @@
         "a": "This tool calculates total active charging time; you must divide by your local peak sun hours to get real-world calendar days."
       }
     ]
+  },
+  {
+    "id": "boost-converter-inductor-sizing",
+    "name": "Boost Converter Inductor Sizing Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "Boost Converter Inductor Size Calculator | VoltCraft",
+    "meta_desc": "Calculate the optimal inductance for your boost converter design to maintain continuous conduction mode (CCM) and minimize output ripple current.",
+    "summary": "Determines the minimum inductance required to prevent saturation and ensure stable voltage regulation in boost converter circuits.",
+    "inputs": [
+      {
+        "name": "vin",
+        "label": "Input Voltage",
+        "default": 5,
+        "unit": "V",
+        "min": 0.1,
+        "max": 100,
+        "step": 0.1
+      },
+      {
+        "name": "vout",
+        "label": "Output Voltage",
+        "default": 12,
+        "unit": "V",
+        "min": 0.1,
+        "max": 200,
+        "step": 0.1
+      },
+      {
+        "name": "freq",
+        "label": "Switching Frequency",
+        "default": 100,
+        "unit": "kHz",
+        "min": 1,
+        "max": 2000,
+        "step": 1
+      },
+      {
+        "name": "iout",
+        "label": "Output Current",
+        "default": 0.5,
+        "unit": "A",
+        "min": 0.01,
+        "max": 20,
+        "step": 0.01
+      }
+    ],
+    "outputs": [
+      {
+        "name": "lmin",
+        "label": "Minimum Inductance",
+        "unit": "uH",
+        "formula": "(Vin * (Vout - Vin)) / (Freq * RippleCurrent * Vout)"
+      }
+    ],
+    "formula_latex": "L_{min} = \\frac{V_{in} \\cdot (V_{out} - V_{in})}{f_{sw} \\cdot \\Delta I_L \\cdot V_{out}}",
+    "faqs": [
+      {
+        "q": "Why is inductance critical in boost converters?",
+        "a": "Insufficient inductance leads to high peak currents, potential core saturation, and increased EMI."
+      },
+      {
+        "q": "What is the recommended ripple current ratio?",
+        "a": "A common design target is to set the inductor ripple current to 20-40% of the maximum output current."
+      }
+    ]
+  },
+  {
+    "id": "rf-coplanar-waveguide-impedance",
+    "name": "Grounded Coplanar Waveguide Impedance Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Grounded Coplanar Waveguide (GCPW) Impedance Calculator",
+    "meta_desc": "Calculate the characteristic impedance of a grounded coplanar waveguide for high-frequency PCB trace design and RF signal integrity.",
+    "summary": "Provides precise characteristic impedance for GCPW traces based on substrate dielectric, trace width, and gap distance.",
+    "inputs": [
+      {
+        "name": "er",
+        "label": "Substrate Dielectric Constant",
+        "default": 4.4,
+        "unit": "",
+        "min": 1,
+        "max": 10,
+        "step": 0.1
+      },
+      {
+        "name": "h",
+        "label": "Substrate Height",
+        "default": 1.6,
+        "unit": "mm",
+        "min": 0.1,
+        "max": 5,
+        "step": 0.05
+      },
+      {
+        "name": "w",
+        "label": "Trace Width",
+        "default": 0.5,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 10,
+        "step": 0.01
+      },
+      {
+        "name": "g",
+        "label": "Gap Width",
+        "default": 0.2,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 5,
+        "step": 0.01
+      }
+    ],
+    "outputs": [
+      {
+        "name": "z0",
+        "label": "Characteristic Impedance",
+        "unit": "Ohm",
+        "formula": "Approximation based on conformal mapping"
+      }
+    ],
+    "formula_latex": "Z_0 = \\frac{30\\pi}{\\sqrt{\\epsilon_{eff}}} \\frac{K(k')}{K(k)}",
+    "faqs": [
+      {
+        "q": "What is the advantage of GCPW over microstrip?",
+        "a": "GCPW provides better isolation between traces and easier component mounting while maintaining controlled impedance."
+      },
+      {
+        "q": "How does substrate thickness affect impedance?",
+        "a": "Increasing substrate height generally increases impedance for a fixed trace width."
+      }
+    ]
+  },
+  {
+    "id": "opamp-active-bandpass-filter",
+    "name": "Multiple Feedback Bandpass Filter Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "measurement",
+    "meta_title": "Multiple Feedback (MFB) Bandpass Filter Calculator",
+    "meta_desc": "Design high-performance MFB active bandpass filters with precise center frequency and Q-factor calculations.",
+    "summary": "Calculates resistor and capacitor values for active MFB bandpass filters to isolate specific frequency bands in signal processing.",
+    "inputs": [
+      {
+        "name": "fc",
+        "label": "Center Frequency",
+        "default": 1000,
+        "unit": "Hz",
+        "min": 10,
+        "max": 100000,
+        "step": 1
+      },
+      {
+        "name": "q",
+        "label": "Quality Factor (Q)",
+        "default": 5,
+        "unit": "",
+        "min": 0.5,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "gain",
+        "label": "Gain",
+        "default": 1,
+        "unit": "V/V",
+        "min": 0.1,
+        "max": 100,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "r1",
+        "label": "Resistor R1",
+        "unit": "kOhm",
+        "formula": "Calculated via MFB design equations"
+      },
+      {
+        "name": "r2",
+        "label": "Resistor R2",
+        "unit": "kOhm",
+        "formula": "Calculated via MFB design equations"
+      },
+      {
+        "name": "r3",
+        "label": "Resistor R3",
+        "unit": "kOhm",
+        "formula": "Calculated via MFB design equations"
+      }
+    ],
+    "formula_latex": "R_1 = \\frac{Q}{2\\pi f_c C A_v}, R_2 = \\frac{Q}{2\\pi f_c C (2Q^2 - A_v)}, R_3 = \\frac{Q}{\\pi f_c C}",
+    "faqs": [
+      {
+        "q": "What is the benefit of MFB topology?",
+        "a": "It is less sensitive to component tolerances and offers better high-frequency performance than Sallen-Key."
+      },
+      {
+        "q": "Can I use this for audio crossovers?",
+        "a": "Yes, it is excellent for isolating specific frequency ranges in audio processing applications."
+      }
+    ]
   }
 ]
