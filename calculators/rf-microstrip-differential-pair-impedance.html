@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Differential Pair Impedance Calculator for High-Speed PCB | VoltCraft</title>
+  <meta name="description" content="Calculate the differential impedance for high-speed microstrip PCB traces based on trace width, spacing, substrate height, and dielectric constant.">
+  <meta property="og:title" content="Differential Pair Impedance Calculator for High-Speed PCB">
+  <meta property="og:description" content="Calculate the differential impedance for high-speed microstrip PCB traces based on trace width, spacing, substrate height, and dielectric constant.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://voltcraft.pages.dev/calculators/rf-microstrip-differential-pair-impedance.html">
+  <link rel="canonical" href="https://voltcraft.pages.dev/calculators/rf-microstrip-differential-pair-impedance.html">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Differential Microstrip Impedance Calculator",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Calculate the differential impedance for high-speed microstrip PCB traces based on trace width, spacing, substrate height, and dielectric constant."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the standard differential impedance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "USB and Ethernet standards typically require 90\u03a9 or 100\u03a9 differential impedance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does substrate height affect impedance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Increasing the height of the dielectric between the trace and ground plane increases the characteristic impedance."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <span>VoltCraft</span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀️</button>
+        <a href="https://buymeacoffee.com/nmanager512" target="_blank" rel="noopener" class="btn-coffee">☕ Buy Me a Coffee</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2.5rem;">
+    <div style="margin-bottom: 1.5rem;">
+      <a href="../index.html" style="color: var(--accent-cyan); text-decoration:none; font-size:0.9rem; font-weight:600;">&larr; Back to All Calculators</a>
+    </div>
+
+    <div class="badge">RF &amp; Audio</div>
+    <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.75rem;">Differential Microstrip Impedance Calculator</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 800px; margin-bottom: 2rem;">Determines the trace geometry required to achieve specific differential impedance for high-speed data transmission lines.</p>
+
+    <div class="featured-calculator" style="margin-bottom: 2.5rem;">
+      <div class="calc-grid">
+        <div class="inputs-col">
+          <h3 style="font-size: 1.15rem; font-weight:700; margin-bottom: 1.25rem;">Input Parameters</h3>
+          
+              <div class="input-group">
+                <div class="input-label-row">
+                  <label for="inp_trace_width">Trace Width</label>
+                  <span style="color: var(--accent-cyan); font-weight:700;">mm</span>
+                </div>
+                <div class="input-control-row">
+                  <input type="number" id="inp_trace_width" class="num-input" value="0.2" step="0.01" min="0.05" max="2">
+                  <input type="range" id="slider_trace_width" class="range-slider" value="0.2" step="0.01" min="0.05" max="2">
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-label-row">
+                  <label for="inp_trace_spacing">Trace Spacing</label>
+                  <span style="color: var(--accent-cyan); font-weight:700;">mm</span>
+                </div>
+                <div class="input-control-row">
+                  <input type="number" id="inp_trace_spacing" class="num-input" value="0.2" step="0.01" min="0.05" max="2">
+                  <input type="range" id="slider_trace_spacing" class="range-slider" value="0.2" step="0.01" min="0.05" max="2">
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-label-row">
+                  <label for="inp_dielectric_h">Substrate Height</label>
+                  <span style="color: var(--accent-cyan); font-weight:700;">mm</span>
+                </div>
+                <div class="input-control-row">
+                  <input type="number" id="inp_dielectric_h" class="num-input" value="0.1" step="0.01" min="0.05" max="1.6">
+                  <input type="range" id="slider_dielectric_h" class="range-slider" value="0.1" step="0.01" min="0.05" max="1.6">
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-label-row">
+                  <label for="inp_er">Dielectric Constant</label>
+                  <span style="color: var(--accent-cyan); font-weight:700;">εr</span>
+                </div>
+                <div class="input-control-row">
+                  <input type="number" id="inp_er" class="num-input" value="4.4" step="0.1" min="1" max="10">
+                  <input type="range" id="slider_er" class="range-slider" value="4.4" step="0.1" min="1" max="10">
+                </div>
+              </div>
+        </div>
+
+        <div class="results-col">
+          <h3 style="font-size: 1.15rem; font-weight:700; margin-bottom: 1.25rem;">Calculation Results</h3>
+          <div class="result-card">
+            
+              <div class="result-metric">
+                <div class="result-label">Differential Impedance (Ω)</div>
+                <div class="result-val" id="out_z_diff">—</div>
+              </div>
+            <button onclick="window.triggerProExport()" style="margin-top:1rem; padding:0.6rem 1rem; background:rgba(6,182,212,0.15); border:1px solid var(--accent-cyan); color:var(--accent-cyan); border-radius:var(--radius-md); font-weight:600; cursor:pointer;">
+              📄 Export Calculation Report (Pro)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contextual Affiliate Recommendation -->
+    <div class="affiliate-section" style="margin-bottom: 2.5rem; padding: 1.5rem;">
+      <div class="affiliate-content">
+        <span class="badge" style="background: rgba(245,158,11,0.2); border-color: var(--accent-amber); color: var(--accent-amber); margin-bottom: 0.5rem;">
+          PCB Fab Partner (JLCPCB)
+        </span>
+        <h4 style="font-size: 1.15rem; color: var(--text-main);">JLCPCB Prototype PCBs (5 High-Precision Boards for $2)</h4>
+        <p style="font-size: 0.88rem;">Tested and recommended for reliable hardware prototyping and accurate measurements.</p>
+      </div>
+      <a href="https://jlcpcb.com/?from=CDVDWKJNX" target="_blank" rel="noopener" class="btn-affiliate" style="padding: 0.6rem 1.25rem; font-size: 0.9rem;">View Recommended Part &rarr;</a>
+    </div>
+
+    <!-- Formula & Engineering Explanation -->
+    <section style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 2.5rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Formula & Theory</h3>
+      <div style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); font-family: monospace; font-size: 1.1rem; color: var(--accent-cyan); margin-bottom: 1.5rem; display:inline-block;">
+        Z_{diff} \approx 2Z_0(1 - 0.48e^{-0.96(s/h)})
+      </div>
+
+      <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Frequently Asked Questions</h3>
+      
+          <div style="margin-bottom: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--text-main);">Q: What is the standard differential impedance?</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">USB and Ethernet standards typically require 90Ω or 100Ω differential impedance.</p>
+          </div>
+          <div style="margin-bottom: 1.25rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--text-main);">Q: How does substrate height affect impedance?</h4>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Increasing the height of the dielectric between the trace and ground plane increases the characteristic impedance.</p>
+          </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="../sitemap.xml">Sitemap</a>
+        <a href="https://buymeacoffee.com/nmanager512" target="_blank" rel="noopener">Support</a>
+      </div>
+      <p>&copy; 2026 VoltCraft. Zero-cost, high-precision engineering tools.</p>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+  <script>
+    // Custom calculation logic for this specific page
+    function solve_rf_microstrip_differential_pair_impedance() {
+            const trace_width = parseFloat(document.getElementById('inp_trace_width').value) || 0;
+      const trace_spacing = parseFloat(document.getElementById('inp_trace_spacing').value) || 0;
+      const dielectric_h = parseFloat(document.getElementById('inp_dielectric_h').value) || 0;
+      const er = parseFloat(document.getElementById('inp_er').value) || 0;
+      
+      // Compute specific formulas
+      if ("rf-microstrip-differential-pair-impedance" === "ohms-law-calculator") {
+        const r = voltage / (current || 1e-9);
+        const p = voltage * current;
+        document.getElementById('out_resistance').textContent = window.formatUnit(r, 'Ω');
+        document.getElementById('out_power').textContent = window.formatUnit(p, 'W');
+      } else if ("rf-microstrip-differential-pair-impedance" === "led-resistor-calculator") {
+        const vr = Math.max(0, v_supply - v_forward);
+        const i_a = i_led / 1000.0;
+        const r = vr / (i_a || 1e-9);
+        const p = vr * i_a;
+        document.getElementById('out_r_resistor').textContent = window.formatUnit(r, 'Ω');
+        document.getElementById('out_p_resistor').textContent = window.formatUnit(p, 'W');
+      } else if ("rf-microstrip-differential-pair-impedance" === "voltage-divider-calculator") {
+        const vout = vin * (r2 / (r1 + r2 || 1));
+        const ratio = r2 / (r1 + r2 || 1);
+        document.getElementById('out_vout').textContent = vout.toFixed(3) + " V";
+        document.getElementById('out_ratio').textContent = ratio.toFixed(4);
+      } else if ("rf-microstrip-differential-pair-impedance" === "battery-life-calculator") {
+        const hours = (capacity * (derate / 100.0)) / (current || 1e-9);
+        document.getElementById('out_runtime_hours').textContent = hours.toFixed(1) + " hours";
+        document.getElementById('out_runtime_days').textContent = (hours / 24.0).toFixed(2) + " days";
+      } else if ("rf-microstrip-differential-pair-impedance" === "pcb-trace-width-calculator") {
+        const area_ext = Math.pow(current / (0.048 * Math.pow(temp_rise, 0.44)), 1 / 0.725);
+        const width_ext = area_ext / (cu_thickness * 1.378);
+        document.getElementById('out_external_width').textContent = width_ext.toFixed(1) + " mils (" + (width_ext * 0.0254).toFixed(2) + " mm)";
+        const area_int = Math.pow(current / (0.024 * Math.pow(temp_rise, 0.44)), 1 / 0.725);
+        const width_int = area_int / (cu_thickness * 1.378);
+        document.getElementById('out_internal_width').textContent = width_int.toFixed(1) + " mils (" + (width_int * 0.0254).toFixed(2) + " mm)";
+      } else if ("rf-microstrip-differential-pair-impedance" === "555-timer-astable-calculator") {
+        const f = 1.44 / ((r1 + 2 * r2) * (c * 1e-6) || 1e-9);
+        const duty = ((r1 + r2) / (r1 + 2 * r2 || 1)) * 100;
+        document.getElementById('out_frequency').textContent = window.formatUnit(f, 'Hz');
+        document.getElementById('out_duty_cycle').textContent = duty.toFixed(1) + " %";
+      } else if ("rf-microstrip-differential-pair-impedance" === "rc-lowpass-filter-calculator") {
+        const fc = 1.0 / (2 * Math.PI * r * (c * 1e-9) || 1e-9);
+        const tau = r * (c * 1e-9) * 1000;
+        document.getElementById('out_fc').textContent = window.formatUnit(fc, 'Hz');
+        document.getElementById('out_tau').textContent = tau.toFixed(2) + " ms";
+      } else if ("rf-microstrip-differential-pair-impedance" === "dbm-to-watts-calculator") {
+        const mw = Math.pow(10, dbm / 10);
+        const w = Math.pow(10, (dbm - 30) / 10);
+        document.getElementById('out_watts').textContent = w >= 1 ? w.toFixed(2) + " W" : (w*1000).toFixed(2) + " mW";
+        document.getElementById('out_milliwatts').textContent = mw.toFixed(2) + " mW";
+      } else if ("rf-microstrip-differential-pair-impedance" === "wire-gauge-awg-calculator") {
+        const d_mm = 0.127 * Math.pow(92, (36 - awg) / 39);
+        const r_per_m = 0.017241 / ((Math.PI * Math.pow(d_mm / 2, 2)));
+        const vdrop = current * (r_per_m * length * 2);
+        document.getElementById('out_diameter_mm').textContent = d_mm.toFixed(3) + " mm";
+        document.getElementById('out_v_drop').textContent = vdrop.toFixed(3) + " V";
+      } else if ("rf-microstrip-differential-pair-impedance" === "smd-resistor-code-calculator") {
+        let res = "Unknown code";
+        const c_str = String(code).trim().toUpperCase();
+        if (c_str.length === 3 && !isNaN(c_str)) {
+          const base = parseInt(c_str.substring(0, 2), 10);
+          const mul = parseInt(c_str[2], 10);
+          res = window.formatUnit(base * Math.pow(10, mul), 'Ω');
+        } else if (c_str.length === 4 && !isNaN(c_str)) {
+          const base = parseInt(c_str.substring(0, 3), 10);
+          const mul = parseInt(c_str[3], 10);
+          res = window.formatUnit(base * Math.pow(10, mul), 'Ω');
+        } else if (c_str.includes('R')) {
+          res = c_str.replace('R', '.') + " Ω";
+        }
+        document.getElementById('out_resistance_str').textContent = res;
+      }
+    }
+
+    // Bind slider & input 2-way syncing
+    document.querySelectorAll('.num-input').forEach(inp => {
+      const slider = document.getElementById('slider_' + inp.id.replace('inp_', ''));
+      if (slider) {
+        inp.addEventListener('input', () => { slider.value = inp.value; solve_rf_microstrip_differential_pair_impedance(); });
+        slider.addEventListener('input', () => { inp.value = slider.value; solve_rf_microstrip_differential_pair_impedance(); });
+      } else {
+        inp.addEventListener('input', solve_rf_microstrip_differential_pair_impedance);
+      }
+    });
+
+    // Initial calculation
+    solve_rf_microstrip_differential_pair_impedance();
+  </script>
+</body>
+</html>

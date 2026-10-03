@@ -3492,5 +3492,200 @@
         "a": "Yes, it is excellent for isolating specific frequency ranges in audio processing applications."
       }
     ]
+  },
+  {
+    "id": "solar-panel-series-parallel-configuration",
+    "name": "Solar Panel Series-Parallel Configuration Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Solar Panel Series-Parallel Array Configurator | VoltCraft",
+    "meta_desc": "Calculate the optimal series and parallel configuration for your solar array to match MPPT voltage limits and increase total current capacity safely.",
+    "summary": "Optimizes solar array wiring to ensure string voltage remains within MPPT controller limits while maximizing power output.",
+    "inputs": [
+      {
+        "name": "panel_voc",
+        "label": "Panel Voc",
+        "default": 42.5,
+        "unit": "V",
+        "min": 5,
+        "max": 200,
+        "step": 0.1
+      },
+      {
+        "name": "panel_isc",
+        "label": "Panel Isc",
+        "default": 9.5,
+        "unit": "A",
+        "min": 0.1,
+        "max": 30,
+        "step": 0.1
+      },
+      {
+        "name": "mppt_max_v",
+        "label": "MPPT Max Voltage",
+        "default": 150,
+        "unit": "V",
+        "min": 12,
+        "max": 600,
+        "step": 1
+      },
+      {
+        "name": "target_panels",
+        "label": "Total Panels",
+        "default": 6,
+        "unit": "units",
+        "min": 1,
+        "max": 100,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "panels_in_series",
+        "label": "Panels in Series",
+        "unit": "units",
+        "formula": "floor(MPPT_Max_V / Panel_Voc)"
+      },
+      {
+        "name": "total_strings",
+        "label": "Parallel Strings",
+        "unit": "units",
+        "formula": "ceil(Total_Panels / Panels_in_Series)"
+      }
+    ],
+    "formula_latex": "N_{series} = \\lfloor \\frac{V_{MPPT,max}}{V_{oc}} \\rfloor, N_{parallel} = \\lceil \\frac{N_{total}}{N_{series}} \\rceil",
+    "faqs": [
+      {
+        "q": "Why is it important to calculate series strings?",
+        "a": "Exceeding the MPPT voltage limit can permanently damage the charge controller."
+      },
+      {
+        "q": "What happens if I exceed current limits?",
+        "a": "Exceeding current ratings can blow internal fuses or cause overheating in the wiring."
+      }
+    ]
+  },
+  {
+    "id": "rf-microstrip-differential-pair-impedance",
+    "name": "Differential Microstrip Impedance Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "Differential Pair Impedance Calculator for High-Speed PCB",
+    "meta_desc": "Calculate the differential impedance for high-speed microstrip PCB traces based on trace width, spacing, substrate height, and dielectric constant.",
+    "summary": "Determines the trace geometry required to achieve specific differential impedance for high-speed data transmission lines.",
+    "inputs": [
+      {
+        "name": "trace_width",
+        "label": "Trace Width",
+        "default": 0.2,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 2,
+        "step": 0.01
+      },
+      {
+        "name": "trace_spacing",
+        "label": "Trace Spacing",
+        "default": 0.2,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 2,
+        "step": 0.01
+      },
+      {
+        "name": "dielectric_h",
+        "label": "Substrate Height",
+        "default": 0.1,
+        "unit": "mm",
+        "min": 0.05,
+        "max": 1.6,
+        "step": 0.01
+      },
+      {
+        "name": "er",
+        "label": "Dielectric Constant",
+        "default": 4.4,
+        "unit": "\u03b5r",
+        "min": 1,
+        "max": 10,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "z_diff",
+        "label": "Differential Impedance",
+        "unit": "\u03a9",
+        "formula": "Wadell's Approximation"
+      }
+    ],
+    "formula_latex": "Z_{diff} \\approx 2Z_0(1 - 0.48e^{-0.96(s/h)})",
+    "faqs": [
+      {
+        "q": "What is the standard differential impedance?",
+        "a": "USB and Ethernet standards typically require 90\u03a9 or 100\u03a9 differential impedance."
+      },
+      {
+        "q": "How does substrate height affect impedance?",
+        "a": "Increasing the height of the dielectric between the trace and ground plane increases the characteristic impedance."
+      }
+    ]
+  },
+  {
+    "id": "bldc-phase-current-ripple-calculator",
+    "name": "BLDC Phase Current Ripple Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "measurement",
+    "meta_title": "BLDC Motor Phase Current Ripple Calculator | VoltCraft",
+    "meta_desc": "Calculate the expected current ripple in BLDC motor phases based on PWM frequency, bus voltage, and motor phase inductance.",
+    "summary": "Helps engineers determine the necessary PWM frequency to keep motor phase current ripple within an acceptable percentage of the rated current.",
+    "inputs": [
+      {
+        "name": "bus_voltage",
+        "label": "Bus Voltage",
+        "default": 24,
+        "unit": "V",
+        "min": 5,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "name": "pwm_freq",
+        "label": "PWM Frequency",
+        "default": 20000,
+        "unit": "Hz",
+        "min": 1000,
+        "max": 200000,
+        "step": 100
+      },
+      {
+        "name": "phase_inductance",
+        "label": "Phase Inductance",
+        "default": 100,
+        "unit": "\u00b5H",
+        "min": 1,
+        "max": 1000,
+        "step": 1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "delta_i",
+        "label": "Current Ripple",
+        "unit": "A",
+        "formula": "V / (4 * L * f_pwm)"
+      }
+    ],
+    "formula_latex": "\\Delta I = \\frac{V_{bus}}{4 \\cdot L_{phase} \\cdot f_{pwm}}",
+    "faqs": [
+      {
+        "q": "Why minimize current ripple?",
+        "a": "High ripple increases iron losses in the motor and causes audible noise and vibration."
+      },
+      {
+        "q": "Does higher PWM frequency always help?",
+        "a": "Higher frequency reduces ripple but increases switching losses in your MOSFET gate drivers."
+      }
+    ]
   }
 ]
