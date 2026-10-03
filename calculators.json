@@ -3129,5 +3129,167 @@
         "a": "Higher gate charge requires more current to switch the MOSFET, leading to higher heat dissipation in the driver IC."
       }
     ]
+  },
+  {
+    "id": "buck-converter-peak-inductor-current",
+    "name": "Buck Converter Peak Inductor Current Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "pcb",
+    "meta_title": "Buck Converter Peak Inductor Current Calculator | VoltCraft",
+    "meta_desc": "Calculate the peak inductor current for your buck converter design to prevent saturation and ensure reliable operation under heavy loads.",
+    "summary": "Determines the peak current flowing through a buck converter inductor, essential for selecting the correct saturation current rating.",
+    "inputs": [
+      {
+        "name": "i_out",
+        "label": "Output Current",
+        "default": 2.0,
+        "unit": "A",
+        "min": 0.1,
+        "max": 50,
+        "step": 0.1
+      },
+      {
+        "name": "ripple_ratio",
+        "label": "Inductor Ripple Ratio",
+        "default": 0.3,
+        "unit": "",
+        "min": 0.1,
+        "max": 0.6,
+        "step": 0.05
+      }
+    ],
+    "outputs": [
+      {
+        "name": "i_peak",
+        "label": "Peak Inductor Current",
+        "unit": "A",
+        "formula": "Iout * (1 + (ripple_ratio / 2))"
+      }
+    ],
+    "formula_latex": "I_{peak} = I_{out} \\times (1 + \\frac{\\Delta I}{2 \\cdot I_{out}})",
+    "faqs": [
+      {
+        "q": "Why is peak current important?",
+        "a": "Exceeding the saturation current of an inductor leads to a drop in inductance, causing excessive ripple and potential switch failure."
+      },
+      {
+        "q": "What is a typical ripple ratio?",
+        "a": "A standard industry practice is to set the ripple current to 30% of the maximum output current."
+      }
+    ]
+  },
+  {
+    "id": "rf-transmission-line-characteristic-impedance",
+    "name": "RF Transmission Line Characteristic Impedance Calculator",
+    "category": "RF & Audio",
+    "affiliate_category": "pcb",
+    "meta_title": "RF Transmission Line Characteristic Impedance Calculator | VoltCraft",
+    "meta_desc": "Calculate the characteristic impedance of microstrip transmission lines based on PCB geometry and substrate dielectric constant.",
+    "summary": "Calculates the impedance of a microstrip transmission line to ensure proper signal matching for high-frequency RF designs.",
+    "inputs": [
+      {
+        "name": "w",
+        "label": "Trace Width",
+        "default": 0.5,
+        "unit": "mm",
+        "min": 0.1,
+        "max": 10,
+        "step": 0.01
+      },
+      {
+        "name": "h",
+        "label": "Substrate Height",
+        "default": 1.6,
+        "unit": "mm",
+        "min": 0.1,
+        "max": 5,
+        "step": 0.01
+      },
+      {
+        "name": "er",
+        "label": "Dielectric Constant",
+        "default": 4.4,
+        "unit": "",
+        "min": 1,
+        "max": 10,
+        "step": 0.1
+      }
+    ],
+    "outputs": [
+      {
+        "name": "z0",
+        "label": "Characteristic Impedance",
+        "unit": "\u03a9",
+        "formula": "(87 / sqrt(er + 1.41)) * ln(5.98 * h / (0.8 * w + t))"
+      }
+    ],
+    "formula_latex": "Z_0 = \\frac{87}{\\sqrt{\\epsilon_r + 1.41}} \\ln \\left( \\frac{5.98h}{0.8w + t} \\right)",
+    "faqs": [
+      {
+        "q": "What is the standard impedance?",
+        "a": "Most RF systems use 50\u03a9 as the standard impedance for cables and PCB traces."
+      },
+      {
+        "q": "Does substrate thickness matter?",
+        "a": "Yes, the height (h) between the trace and the ground plane is a critical factor in determining impedance."
+      }
+    ]
+  },
+  {
+    "id": "li-ion-solar-charging-time-calculator",
+    "name": "Li-ion Solar Charging Time Calculator",
+    "category": "Power & Battery",
+    "affiliate_category": "battery",
+    "meta_title": "Li-ion Solar Charging Time Calculator | VoltCraft",
+    "meta_desc": "Estimate the time required to charge a Lithium-ion battery system using solar panels, accounting for efficiency and sunlight hours.",
+    "summary": "Estimates the total charging duration for battery banks based on solar panel peak power and system efficiency.",
+    "inputs": [
+      {
+        "name": "battery_capacity",
+        "label": "Battery Capacity",
+        "default": 5000,
+        "unit": "mAh",
+        "min": 100,
+        "max": 100000,
+        "step": 100
+      },
+      {
+        "name": "panel_power",
+        "label": "Solar Panel Power",
+        "default": 10,
+        "unit": "W",
+        "min": 1,
+        "max": 500,
+        "step": 1
+      },
+      {
+        "name": "efficiency",
+        "label": "Charging Efficiency",
+        "default": 0.85,
+        "unit": "",
+        "min": 0.5,
+        "max": 1,
+        "step": 0.05
+      }
+    ],
+    "outputs": [
+      {
+        "name": "charge_time",
+        "label": "Estimated Charge Time",
+        "unit": "hours",
+        "formula": "(battery_capacity * 3.7) / (panel_power * efficiency * 1000)"
+      }
+    ],
+    "formula_latex": "T_{charge} = \\frac{Capacity_{Wh}}{P_{panel} \\cdot \\eta}",
+    "faqs": [
+      {
+        "q": "Why is efficiency less than 1?",
+        "a": "Charging losses occur due to MPPT converter inefficiency, cable resistance, and heat dissipation."
+      },
+      {
+        "q": "Does this account for peak sun hours?",
+        "a": "This tool calculates total active charging time; you must divide by your local peak sun hours to get real-world calendar days."
+      }
+    ]
   }
 ]
